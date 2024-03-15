@@ -22,7 +22,6 @@ body {
   width: 680px;
   justify-content: flex-start;
   align-items: center;
-  top: 0;
 }
 
 .sign-in-container img {
@@ -77,4 +76,24 @@ margin-bottom: 50px;
 
 .register-label {
   font-size: 1.6em;
+}
+
+.sign-in-container button {
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 600;
+  text-shadow: 0px 0px 0.7px rgba(255, 255, 255, 0.5);
+  font-size: 1.6em;
+  margin-bottom: 30px;
+  color: white;
+  background-color: #0c0b04;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid white;
+  transition: 0.1s ease;
+}
+
+.sign-in-container button:hover {
+  color: #0c0b04;
+  background-color: white;
+  transition: 0.1s ease;
 }

@@ -11,6 +11,9 @@ export default function SignIn() {
                 <input type="password" required />
                 <div className="labelline">Password</div>
             </div>
+            <button>
+                Login
+            </button>
             <div className="register-label">
                 No account? Click here to register.
             </div>
