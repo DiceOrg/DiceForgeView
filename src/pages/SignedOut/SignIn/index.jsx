@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function SignIn() {
 
     return (
@@ -15,7 +17,7 @@ export default function SignIn() {
                 Login
             </button>
             <div className="register-label">
-                No account? Click here to register.
+                <Link to="/register" style={{ textDecoration: 'none', color: "white"}}>No account? Click here to register.</Link>
             </div>
         </div>
     );

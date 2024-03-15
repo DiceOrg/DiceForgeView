@@ -11,6 +11,7 @@ body {
 
   display: flex;
   min-height: 100vh;
+  max-height: 100vh;
   justify-content: center;
   align-items: center;
 }
@@ -18,9 +19,9 @@ body {
 .sign-in-container {
   display: flex;
   flex-direction: column;
-  scale: calc(80%);
+  scale: calc(55%);
   width: 680px;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 }
 
@@ -38,6 +39,7 @@ margin-bottom: 50px;
 }
 
 .sign-in-container input {
+  font-family: 'Lexend Deca', sans-serif;
   position: absolute;
   color: white;
   width: calc(100% - 64px);
@@ -83,7 +85,7 @@ margin-bottom: 50px;
   font-weight: 600;
   text-shadow: 0px 0px 0.7px rgba(255, 255, 255, 0.5);
   font-size: 1.6em;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   color: white;
   background-color: #0c0b04;
   padding: 20px;
