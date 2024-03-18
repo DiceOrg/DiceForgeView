@@ -4,6 +4,7 @@ import SignIn from './pages/SignedOut/SignIn'
 import Register from './pages/SignedOut/Register';
 import Home from './pages/SignedIn/Home'
 import './App.css'
+import AuthPage from './pages/AuthPage';
 
 
 function App() {
@@ -20,7 +21,8 @@ function App() {
   }, [user, navigate]);
   return (
     <>
-        <Routes>
+        <AuthPage/>
+        {/* <Routes>
           <Route
             path="/"
             element={<Home />}
@@ -33,7 +35,7 @@ function App() {
             path="/signin"
             element={<SignIn />}
           />
-        </Routes>
+        </Routes> */}
     </>
   )
 }
