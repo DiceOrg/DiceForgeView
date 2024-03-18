@@ -6,7 +6,7 @@ export default function Register() {
         <div className="sign-in-container">
             <img src="https://res.cloudinary.com/dhvcqoipp/image/upload/v1710498763/logo_xevjg4.png"></img>
             <div className="input-area">
-                <input type="email" required />
+                <input type="text" required />
                 <div className="labelline">E-mail</div>
             </div>
             <div className="input-area">
