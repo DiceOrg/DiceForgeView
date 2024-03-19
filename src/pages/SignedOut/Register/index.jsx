@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { LoginContext } from "../../../App";
 
+
 export default function Register() {
   const {registerData, setRegisterData} = useContext(LoginContext);
 

@@ -10,6 +10,8 @@ import SignIn from "./pages/SignedOut/SignIn";
 import Register from "./pages/SignedOut/Register";
 import Home from "./pages/SignedIn/Home";
 import "./App.css";
+import MainPage from "./pages/MainPage";
+
 
 const LoginContext = createContext();
 
@@ -23,16 +25,15 @@ function App() {
     username: "",
     email: "",
     password: "",
-    role: "User"
+    //role: "User"
   });
 
-  console.log(location);
 
-  useEffect(() => {
-    if (!user && location.pathname !== "/register") {
-      navigate("/signin", { replace: true });
-    }
-  }, [user, navigate]);
+  // useEffect(() => {
+  //   if (!user && location.pathname !== "/register") {
+  //     navigate("/signin", { replace: true });
+  //   }
+  // }, [user, navigate]);
 
   useEffect(()=>{
     console.log(registerData)
@@ -45,6 +46,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/signin" element={<SignIn />} />
+          <Route path="/main" element={<MainPage />} />
         </Routes>
       </LoginContext.Provider>
     </>
