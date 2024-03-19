@@ -69,11 +69,11 @@
 
 }
 
-.sign-in-container input:focus, input:valid {
+.sign-in-container input:focus, .sign-in-container input.not-empty {
   border: 4px solid white;
 }
 
-.sign-in-container input:focus + .labelline, input:valid + .labelline{
+.sign-in-container input:focus + .labelline, .sign-in-container input.not-empty + .labelline {
   font-size: 1.1em;
   transform: translate(10%, -140%);
   z-index: 1111;

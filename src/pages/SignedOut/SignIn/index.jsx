@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { LoginContext } from "../../../App";
 
 export default function SignIn() {
-  const { loginData, setLoginData } = useContext(LoginContext);
+  const { loginData, setLoginData, checkInput } = useContext(LoginContext);
 
   const handleLogin = async () => {
     try {
@@ -32,23 +32,25 @@ export default function SignIn() {
       <img src="https://res.cloudinary.com/dhvcqoipp/image/upload/v1710498763/logo_xevjg4.png"></img>
       <div className="input-area">
         <input
+          id="e-mail"
           type="text"
-          placeholder="Email"
           value={loginData.email}
           onChange={(e) =>
             setLoginData({ ...loginData, email: e.target.value })
           }
+          onInput={checkInput("e-mail")}
         />
         <div className="labelline">Email</div>
       </div>
       <div className="input-area">
         <input
+          id="password"
           type="password"
-          placeholder="Password"
           value={loginData.password}
           onChange={(e) =>
             setLoginData({ ...loginData, password: e.target.value })
           }
+          onInput={checkInput("password")}
         />
         <div className="labelline">Password</div>
       </div>
