@@ -85,7 +85,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/main" element={<CharacterView character={character} />} />
+          <Route path="/main" element={<CharacterView character={character} setCharacter={setCharacter}/>} />
         </Routes>
       </LoginContext.Provider>
     </>

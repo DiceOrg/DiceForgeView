@@ -1,16 +1,10 @@
 import Skills from "../../Skills";
 import Abilities from "../Abilities/Index";
 
-export default function CharacterView({ character }) {
+export default function CharacterView({ character, setCharacter }) {
 
     if ( character == null )
         return <>loading...</>
-
-
-
-
-    console.log("character, alt", character);
-    console.log(Object.keys(character.abilities))
 
     return (
         <div className="container">
@@ -37,8 +31,8 @@ export default function CharacterView({ character }) {
                             <h5 className="title">Ability Scores</h5>
                         </header>
                         <div className="content">
-                            {Object.keys(character.abilities).map((ability, key) => (
-                                <Abilities name={ability} ability={character.abilities[ability]} key={key}/>
+                            {Object.keys(character.abilities).map((ability_name, key) => (
+                                <Abilities ability_name={ability_name} ability={character.abilities[ability_name]} key={key} setCharacter={setCharacter} character={character}/>
                             ))}
                         </div>
                     </div>
@@ -108,7 +102,8 @@ export default function CharacterView({ character }) {
                         </header>
                         <div className="content">
                             {Object.keys(character.skills).map((skill, key) => (
-                                    <Skills skill={character.skills[skill]} name={skill} key={key} abilities={character.abilities}/>
+                                    <Skills skill={character.skills[skill]} skill_name={skill} key={key} abilities={character.abilities} 
+                                    setCharacter={setCharacter} character={character}/>
                                 ))}
                         </div>
                     </div>
