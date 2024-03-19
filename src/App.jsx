@@ -4,8 +4,8 @@ import SignIn from "./pages/SignedOut/SignIn";
 import Register from "./pages/SignedOut/Register";
 import Home from "./pages/SignedIn/Home";
 import "./App.css";
-import MainPage from "./pages/MainPage";
-import Cookies from 'js-cookie';
+import CharacterView from "./pages/SignedIn/Characters/components/CharacterView";
+
 
 const LoginContext = createContext();
 
@@ -80,7 +80,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/main" element={<MainPage />} />
+          <Route path="/main" element={<CharacterView />} />
         </Routes>
       </LoginContext.Provider>
     </>
