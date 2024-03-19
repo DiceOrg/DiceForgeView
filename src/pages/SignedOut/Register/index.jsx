@@ -4,7 +4,7 @@ import { LoginContext } from "../../../App";
 
 
 export default function Register() {
-  const {registerData, setRegisterData} = useContext(LoginContext);
+  const {registerData, setRegisterData, checkInput} = useContext(LoginContext);
 
   const handleRegister = async () => {
     try {
@@ -35,34 +35,37 @@ export default function Register() {
       <img src="https://res.cloudinary.com/dhvcqoipp/image/upload/v1710498763/logo_xevjg4.png"></img>
       <div className="input-area">
         <input
+          id="e-mail"
           type="text"
-          placeholder="Email"
           value={registerData.email}
           onChange={(e) =>
             setRegisterData({ ...registerData, email: e.target.value })
           }
+          onInput={checkInput("e-mail")}
         />
         <div className="labelline">E-mail</div>
       </div>
       <div className="input-area">
         <input
+          id="username"
           type="text"
-          placeholder="Username"
           value={registerData.username}
           onChange={(e) =>
             setRegisterData({ ...registerData, username: e.target.value })
           }
+          onInput={checkInput("username")}
         />
         <div className="labelline">Username</div>
       </div>
       <div className="input-area">
         <input
+          id="password"
           type="password"
-          placeholder="Password"
           value={registerData.password}
           onChange={(e) =>
             setRegisterData({ ...registerData, password: e.target.value })
           }
+          onInput={checkInput("password")}
         />
         <div className="labelline">Password</div>
       </div>
