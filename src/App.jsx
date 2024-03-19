@@ -5,7 +5,7 @@ import Register from "./pages/SignedOut/Register";
 import Home from "./pages/SignedIn/Home";
 import "./App.css";
 import CharacterView from "./pages/SignedIn/Characters/components/CharacterView";
-
+import Cookies from "js-cookie";
 
 const LoginContext = createContext();
 
