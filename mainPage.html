@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .column {
+            flex: 1;
+            margin-right: 20px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        .column:last-child {
+            margin-right: 0;
+        }
+
+        .box {
+            background-color: #ddd;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Big Header
+    </header>
+
+    <div class="container">
+        <div class="column">
+            <div class="box">Container 1 - Box 1</div>
+            <div class="box">Container 1 - Box 2</div>
+            <div class="box">Container 1 - Box 3</div>
+        </div>
+        <div class="column">
+            <div class="box">Container 2 - Box 1</div>
+            <div class="box">Container 2 - Box 2</div>
+            <div class="box">Container 2 - Box 3</div>
+        </div>
+        <div class="column">
+            <div class="box">Container 3 - Box 1</div>
+            <div class="box">Container 3 - Box 2</div>
+            <div class="box">Container 3 - Box 3</div>
+        </div>
+    </div>
+</body>
+</html>
