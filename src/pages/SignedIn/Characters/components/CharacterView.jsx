@@ -26,69 +26,81 @@ export default function CharacterView({ character }) {
                         </header>
                         <div className="content">
                             <div className="row">
-                                <div className="column">
+                                <div className="column text-center">
                                     <div>8</div>
                                     <div>Score</div>
                                 </div>
-                                <div className="column">
+                                <div className="column text-center size-3">
                                     <div>Str</div>
                                     <div>Strength</div>
                                 </div>
-                                <div className="column">
+                                <div className="column text-center">
                                     <div>-1</div>
                                     <div>Mod</div>
                                 </div>
-                                <div className="column">
+                                <div className="column text-center">
                                     <input type="checkbox" />
                                     <div>Prof</div>
                                 </div>
-                                <div className="column">
+                                <div className="column text-center">
                                     <div>0</div>
                                     <div>Misc</div>
                                 </div>
+                                <div className="column text-center">
+                                    <div>-1</div>
+                                    <div>Save</div>
+                                </div>
                             </div>
                             <div className="row">
-                                <div className="column">
+                                <div className="column text-center">
                                     <div>8</div>
                                     <div>Score</div>
                                 </div>
-                                <div className="column">
+                                <div className="column text-center size-3">
                                     <div>Dex</div>
                                     <div>Dexterity</div>
                                 </div>
-                                <div className="column">
+                                <div className="column text-center">
                                     <div>-1</div>
                                     <div>Mod</div>
                                 </div>
-                                <div className="column">
+                                <div className="column text-center">
                                     <input type="checkbox" />
                                     <div>Prof</div>
                                 </div>
-                                <div className="column">
+                                <div className="column text-center">
                                     <div>0</div>
                                     <div>Misc</div>
+                                </div>
+                                <div className="column text-center">
+                                    <div>-1</div>
+                                    <div>Save</div>
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="column">
+                                <div className="column text-center">
                                     <div>8</div>
                                     <div>Score</div>
                                 </div>
-                                <div className="column">
+                                <div className="column text-center size-3">
                                     <div>Con</div>
                                     <div>Constitution</div>
                                 </div>
-                                <div className="column">
+                                <div className="column text-center">
                                     <div>-1</div>
                                     <div>Mod</div>
                                 </div>
-                                <div className="column">
+                                <div className="column text-center">
                                     <input type="checkbox" />
                                     <div>Prof</div>
                                 </div>
-                                <div className="column">
+                                <div className="column text-center">
                                     <div>0</div>
                                     <div>Misc</div>
+                                </div>
+                                <div className="column text-center">
+                                    <div>-1</div>
+                                    <div>Save</div>
                                 </div>
                             </div>
                         </div>
