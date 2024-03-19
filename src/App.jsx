@@ -5,7 +5,7 @@ import Register from "./pages/SignedOut/Register";
 import Home from "./pages/SignedIn/Home";
 import "./App.css";
 import MainPage from "./pages/MainPage";
-
+import Cookies from 'js-cookie';
 
 const LoginContext = createContext();
 
@@ -21,7 +21,7 @@ function App() {
     password: "",
     //role: "User"
   });
-
+  
   function checkInput(inputField) {
     var input = document.getElementById(inputField);
     if (input){
@@ -33,6 +33,32 @@ function App() {
     }
   }
 
+  async function fetchCharacterData() {
+    try {
+      // Get JWT token from wherever it's stored (e.g., localStorage, cookie)
+      const jwtToken = Cookies.get('jwt');
+  
+      const response = await fetch('https://localhost:7256/character', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${jwtToken}`,
+          'Content-Type': 'application/json'
+        }
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Data:', data);
+      } else {
+        console.error('Failed to fetch data:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error.message);
+    }
+  }
+  const d = fetchCharacterData();
+  console.log(d);
+
   // useEffect(() => {
   //   if (!user && location.pathname !== "/register") {
   //     navigate("/signin", { replace: true });
@@ -40,8 +66,12 @@ function App() {
   // }, [user, navigate]);
 
   useEffect(()=>{
-    console.log(registerData)
+    console.log(registerData.jwtToken)
   }, [registerData])
+
+  useEffect(()=>{
+    console.log(loginData)
+  }, [loginData])
 
   return (
     <>
