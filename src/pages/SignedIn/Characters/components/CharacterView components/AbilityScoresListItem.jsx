@@ -1,13 +1,10 @@
-export default function Abilities({ability_name, ability, setCharacter, character}) {
+export default function AbilityScoresListItem({ability_name, ability, setCharacter, character}) {
 
     if ( ability_name == "id")
         return <></>
 
-    // I cannot recall if this changes or not, we can pass this as a prop or make change if it is dependent on lvl. 
     let prof_value = 2;
     
-
-    // invert checkbox or change value
     const change = (event) => {
         const {name, value} = event.target;
         let objectToChange = {...character};
@@ -18,7 +15,6 @@ export default function Abilities({ability_name, ability, setCharacter, characte
         else    
             return;
         setCharacter(objectToChange);
-        // fetch, put
     }
 
     return (

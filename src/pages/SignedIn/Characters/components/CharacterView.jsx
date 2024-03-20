@@ -1,9 +1,17 @@
+import { useState, useEffect, useContext } from "react";
+import { DataContext } from "../../../../App";
 import Skills from "../../Skills";
-import Abilities from "../Abilities/Index";
+import Abilities from "./CharacterView components/AbilityScoresList";
 
-export default function CharacterView({ character, setCharacter }) {
+export default function CharacterView() {
+    const { fetchCharacterData } = useContext(DataContext)
+    const [character, setCharacter] = useState();
+    
+    useEffect(() => {
+        fetchCharacterData(1, setCharacter);
+      }, [])
 
-    if ( character == null )
+    if (character == null)
         return <>loading...</>
 
     return (
@@ -23,7 +31,7 @@ export default function CharacterView({ character, setCharacter }) {
                             <h5 className="title">Trackables</h5>
                         </header>
                         <div className="content">
-
+                            <Abilities abilities={character.abilities} character={character} setCharacter={setCharacter} />
                         </div>
                     </div>
                     <div className="box">
@@ -31,9 +39,7 @@ export default function CharacterView({ character, setCharacter }) {
                             <h5 className="title">Ability Scores</h5>
                         </header>
                         <div className="content">
-                            {Object.keys(character.abilities).map((ability_name, key) => (
-                                <Abilities ability_name={ability_name} ability={character.abilities[ability_name]} key={key} setCharacter={setCharacter} character={character}/>
-                            ))}
+
                         </div>
                     </div>
                     <div className="box">
@@ -102,9 +108,9 @@ export default function CharacterView({ character, setCharacter }) {
                         </header>
                         <div className="content">
                             {Object.keys(character.skills).map((skill, key) => (
-                                    <Skills skill={character.skills[skill]} skill_name={skill} key={key} abilities={character.abilities} 
-                                    setCharacter={setCharacter} character={character}/>
-                                ))}
+                                <Skills skill={character.skills[skill]} skill_name={skill} key={key} abilities={character.abilities}
+                                    setCharacter={setCharacter} character={character} />
+                            ))}
                         </div>
                     </div>
                     <div className="box">
