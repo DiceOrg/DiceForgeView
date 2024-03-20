@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { useParams } from 'react-router-dom';
 import { DataContext } from "../../../../App";
 import Skills from "../../Skills";
 import Abilities from "./CharacterView components/AbilityScoresList";
@@ -6,11 +7,12 @@ import CharacterHeader from "./CharacterHeader";
 import AbilityScoresList from "./CharacterView components/AbilityScoresList";
 
 export default function CharacterView() {
+    const { id } = useParams();
     const { fetchCharacter } = useContext(DataContext)
     const [character, setCharacter] = useState();
     
     useEffect(() => {
-        fetchCharacter(1, setCharacter);
+        fetchCharacter(id, setCharacter);
       }, [])
 
     if (character == null)

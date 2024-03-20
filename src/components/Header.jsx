@@ -1,4 +1,9 @@
+import { NavLink, useLocation } from 'react-router-dom';
+
 export default function Header() {
+    const color = "white";
+    const location = useLocation();
+    const isActive = (path) => location.pathname === path;
 
     return (
         <header className="header">
@@ -7,6 +12,22 @@ export default function Header() {
                 <path d="M5.5 4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m8 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0 8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m-8 4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-4a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
             </svg>
             <h1 className="logo-title">DiceForge</h1>
+            <div className="navbar">
+                <NavLink to="/" style={{ color: color, textDecoration: 'none' }} className={(navData) => (navData.isActive ? "active" : 'none')}>
+                    <div className="nav-item-container">
+                        <div className="nav-item-content">
+                            <h3>Home</h3>
+                        </div>
+                    </div>
+                </NavLink>
+                <NavLink to="/characters" style={{ color: color, textDecoration: 'none' }} className={(navData) => (navData.isActive ? "active" : 'none')}>
+                    <div className="nav-item-container">
+                        <div className="nav-item-content">
+                            <h3>Characters</h3>
+                        </div>
+                    </div>
+                </NavLink>
+            </div>
         </header>
     );
 }
