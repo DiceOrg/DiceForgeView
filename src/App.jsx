@@ -89,13 +89,13 @@ function App() {
     //Check if JWT is valid and if it is, input to user state username and email
   }, []);
 
-  useEffect(() => {
-    if (!user && location.pathname !== "/register") {
-      navigate("/signin", { replace: true });
-    } else if(user && location.pathname === "/signin" || user && location.pathname === "/register"){
-      navigate("/", { replace: true });
-    }
-  }, [user, navigate]);
+  // useEffect(() => {
+  //   if (!user && location.pathname !== "/register") {
+  //     navigate("/signin", { replace: true });
+  //   } else if(user && location.pathname === "/signin" || user && location.pathname === "/register"){
+  //     navigate("/", { replace: true });
+  //   }
+  // }, [user, navigate]);
 
   useEffect(() => {
     console.log(registerData)
