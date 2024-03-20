@@ -1,6 +1,52 @@
-import React from "react";
+import Cookies from "js-cookie";
+import React, { useEffect, useState } from "react";
 
-function CharacterHeader() {
+function CharacterHeader({character, setCharacter}) {
+  const [speed, setSpeed] = useState('');
+
+  async function updateSpeed() {
+    try {
+      const jwtToken = Cookies.get('jwt');
+
+      const response = await fetch(`https://localhost:7256/character/Speed/${character.speed.id}`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${jwtToken}`,
+          'Content-Type': 'application/json'
+        }, 
+        body: JSON.stringify({value: speed}),
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Speed changed:', data)
+        //setSpeed(speed)
+      } else {
+        console.error('Failed to fetch data:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error.message);
+    }
+  }
+
+  useEffect(() => {
+    updateSpeed
+  }, [speed])
+
+  const changeSpeed = async (event) => {
+    try {
+      const { value } = event.target;
+      console.log(value);
+  
+      // Update the speed state
+      setSpeed(value);
+  
+      // Send PUT request to update speed in the API
+      await updateSpeed();
+    } catch (error) {
+      console.error('Error updating speed:', error);
+    }
+  };
   return (
     <>
       <div className="character-header">
@@ -34,8 +80,14 @@ function CharacterHeader() {
             <p>Initiativ</p>
           </div>
           <div>
-            <p>45</p>
+            <input
+            name="value"
+            value={speed}
+            onChange={changeSpeed}
+            />
+            
             <p>Speed</p>
+            <p>{speed}</p>
           </div>
         </div>
       </div>
