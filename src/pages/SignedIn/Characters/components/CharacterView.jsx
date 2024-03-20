@@ -26,7 +26,7 @@ export default function CharacterView() {
           </div>
         </div>
         <div className="column">
-            <CharacterHeader/>
+            <CharacterHeader character={character} setCharacter={setCharacter}/>
         </div>
       </div>
       <div className="row">
@@ -42,7 +42,7 @@ export default function CharacterView() {
               <h5 className="title">Ability Scores</h5>
             </header>
             <div className="content">
-                <AbilityScoresList abilities={character.abilities} character={character} setCharacter={setCharacter}/>
+                {/* <AbilityScoresList abilities={character.abilities} character={character} setCharacter={setCharacter}/> */}
             </div>
           </div>
           <div className="box">

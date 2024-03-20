@@ -31,14 +31,14 @@ export default function AbilityScoresListItem({ ability_name, ability_ref, setCh
         } catch (error) {
           console.error('Error fetching data:', error.message);
         }
-      }
+    }
 
     useEffect(() => {
         updateAbility();
     }, [ability])
 
     const change = (event) => {
-        const { name, value } = event.target;
+    const { name, value } = event.target;
         let objectToChange = { ...character };
         if (name == "prof"){
             objectToChange.abilities[ability_name].prof ^= true;
