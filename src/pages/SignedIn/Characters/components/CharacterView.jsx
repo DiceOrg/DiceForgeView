@@ -3,6 +3,7 @@ import { DataContext } from "../../../../App";
 import Skills from "../../Skills";
 import Abilities from "./CharacterView components/AbilityScoresList";
 import CharacterHeader from "./CharacterHeader";
+import AbilityScoresList from "./CharacterView components/AbilityScoresList";
 
 export default function CharacterView() {
     const { fetchCharacter } = useContext(DataContext)
@@ -41,15 +42,7 @@ export default function CharacterView() {
               <h5 className="title">Ability Scores</h5>
             </header>
             <div className="content">
-              {Object.keys(character.abilities).map((ability_name, key) => (
-                <Abilities
-                  ability_name={ability_name}
-                  ability={character.abilities[ability_name]}
-                  key={key}
-                  setCharacter={setCharacter}
-                  character={character}
-                />
-              ))}
+                <AbilityScoresList abilities={character.abilities} character={character} setCharacter={setCharacter}/>
             </div>
           </div>
           <div className="box">

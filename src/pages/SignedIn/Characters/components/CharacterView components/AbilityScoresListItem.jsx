@@ -10,12 +10,17 @@ export default function AbilityScoresListItem({ ability_name, ability, setCharac
         let objectToChange = { ...character };
         if (name == "prof")
             objectToChange.abilities[ability_name].prof ^= true;
-        else if (name == "value" && !isNaN(value))
+        else if (name == "value" && !isNaN(value)){
             objectToChange.abilities[ability_name].value = value;
+            if ( value > 30)
+                objectToChange.abilities[ability_name].value = 30;
+        }
         else
             return;
         setCharacter(objectToChange);
     }
+
+    
 
     return (
         <div className="row no-wrap">

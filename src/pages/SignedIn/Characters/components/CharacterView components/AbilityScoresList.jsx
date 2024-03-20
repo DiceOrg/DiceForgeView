@@ -1,7 +1,6 @@
 import AbilityScoresListItem from "./AbilityScoresListItem";
 
 export default function AbilityScoresList({ abilities, character, setCharacter }) {
-    console.log(abilities)
 
     return (
         <>
