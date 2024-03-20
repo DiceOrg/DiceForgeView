@@ -1,6 +1,5 @@
 import { useState, useEffect, createContext } from "react";
 import { Route, Routes, Link, useNavigate, useLocation } from "react-router-dom";
-import Header from "./components/Header";
 import SignIn from "./pages/SignedOut/SignIn";
 import Register from "./pages/SignedOut/Register";
 import Home from "./pages/SignedIn/Home";
