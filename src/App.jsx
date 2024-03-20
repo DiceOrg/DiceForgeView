@@ -7,7 +7,7 @@ import Header from "./components/Header";
 import "./App.css";
 import CharacterView from "./pages/SignedIn/Characters/components/CharacterView";
 import Cookies from "js-cookie";
-import CharacterList from "./pages/SignedIn/Characters/components/CharacterList";
+import Characters from "./pages/SignedIn/Characters";
 
 const LoginContext = createContext();
 const DataContext = createContext();
@@ -89,13 +89,13 @@ function App() {
     //Check if JWT is valid and if it is, input to user state username and email
   }, []);
 
-  useEffect(() => {
-    if (!user && location.pathname !== "/register") {
-      navigate("/signin", { replace: true });
-    } else if(user && location.pathname === "/signin" || user && location.pathname === "/register"){
-      navigate("/", { replace: true });
-    }
-  }, [user, navigate]);
+  // useEffect(() => {
+  //   if (!user && location.pathname !== "/register") {
+  //     navigate("/signin", { replace: true });
+  //   } else if(user && location.pathname === "/signin" || user && location.pathname === "/register"){
+  //     navigate("/", { replace: true });
+  //   }
+  // }, [user, navigate]);
 
   useEffect(() => {
     console.log(registerData)
@@ -114,7 +114,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/signin" element={<SignIn />} />
-            <Route path="/characters" element={<CharacterList />} />
+            <Route path="/characters" element={<Characters />} />
             <Route path="/main" element={<CharacterView />} />
           </Routes>
         </LoginContext.Provider>

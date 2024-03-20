@@ -29,6 +29,11 @@ body {
   flex-wrap: nowrap !important;
 }
 
+.full-height {
+  height: 100vh;
+  top: 0;
+}
+
 .header {
   background-color: #000046;
   padding: 10px 25px;
@@ -308,9 +313,25 @@ body {
   margin: 0;
 }
 
+.characters-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-self: flex-start;
+}
+
+.characters-container h1 {
+  padding-bottom: 10px;
+  border-bottom: 1px solid white;
+}
+
 .characters-row {
   width: 100%;
   column-gap: 1.25rem;
+}
+
+.character-column {
+  width: 33.3333%
 }
 
 .character-card {
