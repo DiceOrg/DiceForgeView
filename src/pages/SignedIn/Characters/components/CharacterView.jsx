@@ -1,9 +1,8 @@
 import { useState, useEffect, useContext } from "react";
 import { DataContext } from "../../../../App";
-import Skills from "../../Skills";
-import Abilities from "./CharacterView components/AbilityScoresList";
 import CharacterHeader from "./CharacterHeader";
 import AbilityScoresList from "./CharacterView components/AbilityScoresList";
+import { SkillList } from "./CharacterView components/SkillList";
 
 export default function CharacterView() {
     const { fetchCharacter } = useContext(DataContext)
@@ -42,7 +41,7 @@ export default function CharacterView() {
               <h5 className="title">Ability Scores</h5>
             </header>
             <div className="content">
-                {/* <AbilityScoresList abilities={character.abilities} character={character} setCharacter={setCharacter}/> */}
+                <AbilityScoresList abilities={character.abilities} character={character} setCharacter={setCharacter}/>
             </div>
           </div>
           <div className="box">
@@ -96,16 +95,7 @@ export default function CharacterView() {
               <h5 className="title">Skills</h5>
             </header>
             <div className="content">
-              {Object.keys(character.skills).map((skill, key) => (
-                <Skills
-                  skill={character.skills[skill]}
-                  skill_name={skill}
-                  key={key}
-                  abilities={character.abilities}
-                  setCharacter={setCharacter}
-                  character={character}
-                />
-              ))}
+                <SkillList character={character} setCharacter={setCharacter}/>
             </div>
           </div>
           <div className="box">
