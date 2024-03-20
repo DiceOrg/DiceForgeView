@@ -25,7 +25,7 @@ export default function CharacterView({ character }) {
                             <h5 className="title">Ability Scores</h5>
                         </header>
                         <div className="content">
-                            <div className="row">
+                            <div className="row no-wrap">
                                 <div className="column text-center">
                                     <div>8</div>
                                     <div>Score</div>

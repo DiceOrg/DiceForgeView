@@ -20,6 +20,29 @@
   text-align: center !important;
 }
 
+.no-wrap {
+  flex-wrap: nowrap !important;
+}
+
+.header {
+  background-color: #000046;
+  padding: 10px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(100% - 50px);
+  height: 30px;
+  margin: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.logo {
+  height: 100%;
+  width: auto;
+}
+
 .sign-in-container {
   display: flex;
   box-sizing: border-box;
@@ -42,6 +65,66 @@
     width: 75%;
   }
 }
+
+@media screen and (max-width: 900px) {
+  .sign-in-container img {
+    width: 65%;
+  }
+
+  .input-area {
+    margin-bottom: 3% !important;
+  }
+
+  .sign-in-container {
+    height: 80% !important;
+  }
+
+  .sign-in-container input {
+    min-height: 40px !important;
+    height: 80% !important;
+    font-size: 1.2em !important;
+  }
+  .labelline {
+    font-size: 1.3em !important;
+    padding: 0 4% !important;
+  }
+  .sign-in-container input:focus + .labelline, .sign-in-container input.not-empty + .labelline {
+    font-size: 1em !important;
+    transform: translate(10%, -120%) !important;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .sign-in-container img {
+    width: 65%;
+  }
+
+  .input-area {
+    margin-bottom: 0% !important;
+  }
+
+  .sign-in-container input {
+    min-height: 30px !important;
+    height: 60% !important;
+    font-size: 1.1em !important;
+    border: 1.5px solid white !important;
+  }
+
+  .labelline {
+    font-size: 1.0em !important;
+    padding: 0 3% !important;
+  }
+
+  .sign-in-container input:focus + .labelline, .sign-in-container input.not-empty + .labelline {
+    font-size: 0.9em !important;
+    transform: translate(10%, -100%) !important;
+  }
+
+  .sign-in-container input:focus, .sign-in-container input.not-empty {
+    border: 2.5px solid white !important;
+  }
+}
+
 
 
 .input-area {
@@ -141,6 +224,7 @@
   flex: 1;
   padding-right: 0.25rem;
   padding-left: 0.25rem;
+  min-width: 0;
 }
 
 .row {
