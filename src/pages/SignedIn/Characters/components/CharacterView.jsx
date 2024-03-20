@@ -5,11 +5,11 @@ import Abilities from "./CharacterView components/AbilityScoresList";
 import CharacterHeader from "./CharacterHeader";
 
 export default function CharacterView() {
-    const { fetchCharacterData } = useContext(DataContext)
+    const { fetchCharacter } = useContext(DataContext)
     const [character, setCharacter] = useState();
     
     useEffect(() => {
-        fetchCharacterData(1, setCharacter);
+        fetchCharacter(1, setCharacter);
       }, [])
 
     if (character == null)

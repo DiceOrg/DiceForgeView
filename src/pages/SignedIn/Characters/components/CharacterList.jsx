@@ -1,20 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { DataContext } from "../../../../App";
 import CharacterListItem from "./CharacterListItem";
-import Cookies from "js-cookie";
 
 function CharacterList() {
-  
-  return (
-    <>
-      <ul className="character-list">
-        {characters.map((character, index) => (
-          <li key={index} className="character-card">
-            <h2>{character.name}</h2>
-          </li>
-        ))}
-      </ul>
-    </>
-  );
+    const { fetchAllCharacters } = useContext(DataContext)
+    const [characters, setCharacters] = useState([]);
+
+    useEffect(() => {
+        fetchAllCharacters(setCharacters)
+        console.log(characters)
+    }, [])
+
+    if (!characters) return <p>loading...</p>
+
+
+    return (
+        <>
+            <div className="row characters-row">
+                {characters.map((character, index) => (
+                    <CharacterListItem character={character} key={index}/>
+                ))}
+            </div>
+        </>
+    );
 }
 
 export default CharacterList;
