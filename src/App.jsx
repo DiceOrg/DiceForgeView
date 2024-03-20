@@ -6,6 +6,7 @@ import Home from "./pages/SignedIn/Home";
 import "./App.css";
 import CharacterView from "./pages/SignedIn/Characters/components/CharacterView";
 import Cookies from "js-cookie";
+import Header from "./components/Header";
 
 const LoginContext = createContext();
 const DataContext = createContext();
