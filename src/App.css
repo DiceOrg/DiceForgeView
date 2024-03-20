@@ -11,9 +11,14 @@
   text-shadow: 0px 0px 0.7px rgba(255, 255, 255, 0.5);
 
   display: flex;
-  height: 100vh;
+  height: calc(100vh - 50px);
   justify-content: center;
   align-items: center;
+}
+
+body {
+  position: relative;
+  top: 50px;
 }
 
 .text-center {
@@ -29,7 +34,6 @@
   padding: 10px 25px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   width: calc(100% - 50px);
   height: 30px;
   margin: 0;
@@ -41,6 +45,12 @@
 .logo {
   height: 100%;
   width: auto;
+  margin-right: 10px;
+}
+
+.logo-title {
+  position: relative;
+  left: 0;
 }
 
 .sign-in-container {
