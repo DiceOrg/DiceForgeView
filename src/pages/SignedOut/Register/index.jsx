@@ -25,7 +25,6 @@ export default function Register() {
         console.error("Registration failed:", response.statusText);
       }
     } catch (error) {
-        console.log(response)
         console.error("Registration failed:", error.message);
     }
   };

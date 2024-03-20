@@ -1,6 +1,10 @@
-import CharacterList from "./CharacterList";
+import Skills from "../../Skills";
+import Abilities from "../Abilities/Index";
 
-export default function CharacterView({ character }) {
+export default function CharacterView({ character, setCharacter }) {
+
+    if ( character == null )
+        return <>loading...</>
 
     return (
         <div className="container">
@@ -29,72 +33,9 @@ export default function CharacterView({ character }) {
                             <h5 className="title">Ability Scores</h5>
                         </header>
                         <div className="content">
-                            <div className="row">
-                                <div className="column">
-                                    <div>8</div>
-                                    <div>Score</div>
-                                </div>
-                                <div className="column">
-                                    <div>Str</div>
-                                    <div>Strength</div>
-                                </div>
-                                <div className="column">
-                                    <div>-1</div>
-                                    <div>Mod</div>
-                                </div>
-                                <div className="column">
-                                    <input type="checkbox" />
-                                    <div>Prof</div>
-                                </div>
-                                <div className="column">
-                                    <div>0</div>
-                                    <div>Misc</div>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="column">
-                                    <div>8</div>
-                                    <div>Score</div>
-                                </div>
-                                <div className="column">
-                                    <div>Dex</div>
-                                    <div>Dexterity</div>
-                                </div>
-                                <div className="column">
-                                    <div>-1</div>
-                                    <div>Mod</div>
-                                </div>
-                                <div className="column">
-                                    <input type="checkbox" />
-                                    <div>Prof</div>
-                                </div>
-                                <div className="column">
-                                    <div>0</div>
-                                    <div>Misc</div>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="column">
-                                    <div>8</div>
-                                    <div>Score</div>
-                                </div>
-                                <div className="column">
-                                    <div>Con</div>
-                                    <div>Constitution</div>
-                                </div>
-                                <div className="column">
-                                    <div>-1</div>
-                                    <div>Mod</div>
-                                </div>
-                                <div className="column">
-                                    <input type="checkbox" />
-                                    <div>Prof</div>
-                                </div>
-                                <div className="column">
-                                    <div>0</div>
-                                    <div>Misc</div>
-                                </div>
-                            </div>
+                            {Object.keys(character.abilities).map((ability_name, key) => (
+                                <Abilities ability_name={ability_name} ability={character.abilities[ability_name]} key={key} setCharacter={setCharacter} character={character}/>
+                            ))}
                         </div>
                     </div>
                     <div className="box">
@@ -162,7 +103,10 @@ export default function CharacterView({ character }) {
                             <h5 className="title">Skills</h5>
                         </header>
                         <div className="content">
-
+                            {Object.keys(character.skills).map((skill, key) => (
+                                    <Skills skill={character.skills[skill]} skill_name={skill} key={key} abilities={character.abilities} 
+                                    setCharacter={setCharacter} character={character}/>
+                                ))}
                         </div>
                     </div>
                     <div className="box">
