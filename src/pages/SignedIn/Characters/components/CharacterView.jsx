@@ -1,10 +1,14 @@
+import CharacterList from "./CharacterList";
+
 export default function CharacterView({ character }) {
 
     return (
         <div className="container">
             <div className="row">
                 <div className="column">
-                    <div className="box">Container 1 - Box 1</div>
+                    <div className="box">Container 1 - Box 1
+                    <CharacterList/>
+                    </div>
                 </div>
                 <div className="column">
                     <div className="box">Container 1 - Box 1</div>

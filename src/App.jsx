@@ -38,7 +38,7 @@ function App() {
       // Get JWT token from wherever it's stored (e.g., localStorage, cookie)
       const jwtToken = Cookies.get('jwt');
   
-      const response = await fetch('https://localhost:7256/character', {
+      const response = await fetch('https://localhost:7256/character/1', {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${jwtToken}`,
