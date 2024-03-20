@@ -1,26 +1,26 @@
-export default function AbilityScoresListItem({ ability_name, ability, setCharacter, character }) {
+import { useEffect, useState } from "react";
 
-    if (ability_name == "id")
-        return <></>
+export default function AbilityScoresListItem({ ability_name, ability, setCharacter, character }) {
 
     let prof_value = 2;
 
     const change = (event) => {
         const { name, value } = event.target;
         let objectToChange = { ...character };
-        if (name == "prof")
+        if (name == "prof"){
             objectToChange.abilities[ability_name].prof ^= true;
-        else if (name == "value" && !isNaN(value)){
+        }else if (name == "value" && !isNaN(value)){
             objectToChange.abilities[ability_name].value = value;
-            if ( value > 30)
+            if ( value > 30){
                 objectToChange.abilities[ability_name].value = 30;
+            }else if (value < 0){
+                objectToChange.abilities[ability_name].value = 0;
+            }
         }
         else
             return;
         setCharacter(objectToChange);
     }
-
-    
 
     return (
         <div className="row no-wrap">
