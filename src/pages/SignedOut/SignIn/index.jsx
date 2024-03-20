@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { LoginContext } from "../../../App";
+import Cookies from "js-cookie";
 
 
 export default function SignIn() {
@@ -19,6 +20,7 @@ export default function SignIn() {
         const data = await response.json();
         // Handle successful login, e.g., store token in local storage
         console.log(data);
+        Cookies.set('jwt', data.token);
       } else {
         // Handle error response
         console.error("Login failed:", response.statusText);
