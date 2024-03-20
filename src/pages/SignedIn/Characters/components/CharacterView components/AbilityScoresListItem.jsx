@@ -6,20 +6,22 @@ export default function AbilityScoresListItem({ ability_name, ability_ref, setCh
     let prof_value = 2;
 
     const [ability, setAbility] = useState(ability_ref);
+    const [alteration, setAlteration] = useState(false);
 
     async function updateAbility() {
         try {
-            console.log("started")
+            console.log("started", ability.id, JSON.stringify(ability));
           const jwtToken = Cookies.get('jwt');
     
           const response = await fetch(`https://localhost:7256/character/Ability/${ability.id}`, {
             method: 'PUT',
             headers: {
+              'accept': "*/*",
               'Authorization': `Bearer ${jwtToken}`,
               'Content-Type': 'application/json'
             }, 
-            body: JSON.stringify(ability),
-          });
+            body: JSON.stringify(ability)
+          }).then(res => res.json());
           console.log("finished", response);
     
           if (response.ok) {
@@ -34,8 +36,12 @@ export default function AbilityScoresListItem({ ability_name, ability_ref, setCh
       }
 
     useEffect(() => {
-        updateAbility();
-    }, [ability])
+        console.log("alteration", alteration);
+        if ( alteration ){
+            updateAbility();
+            setAlteration(false);
+        }
+    }, [alteration, ability])
 
     const change = (event) => {
         const { name, value } = event.target;
@@ -43,7 +49,7 @@ export default function AbilityScoresListItem({ ability_name, ability_ref, setCh
         if (name == "prof"){
             objectToChange.abilities[ability_name].prof ^= true;
         }else if (name == "value" && !isNaN(value)){
-            objectToChange.abilities[ability_name].value = value;
+            objectToChange.abilities[ability_name].value = Number(value);
             if ( value > 30){
                 objectToChange.abilities[ability_name].value = 30;
             }else if (value < 0){
@@ -54,6 +60,7 @@ export default function AbilityScoresListItem({ ability_name, ability_ref, setCh
             return;
         setCharacter(objectToChange);
         setAbility(objectToChange.abilities[ability_name]);
+        setAlteration(true);
         console.log("change", objectToChange.abilities[ability_name])
     }
 
