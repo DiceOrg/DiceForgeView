@@ -4,10 +4,10 @@ import { LoginContext } from "../../../App";
 import Cookies from "js-cookie";
 import "../signedout.css";
 
-
 export default function SignIn() {
   const { loginData, setLoginData, checkInput } = useContext(LoginContext);
 
+  console.log(loginData);
   const handleLogin = async () => {
     try {
       const response = await fetch("https://localhost:7256/api/users/login", {
@@ -21,7 +21,7 @@ export default function SignIn() {
         const data = await response.json();
         // Handle successful login, e.g., store token in local storage
         console.log(data);
-        Cookies.set('jwt', data.token);
+        Cookies.set("jwt", data.token);
       } else {
         // Handle error response
         console.error("Login failed:", response.statusText);
@@ -58,7 +58,7 @@ export default function SignIn() {
         />
         <div className="labelline">Password</div>
       </div>
-      <button onClick={handleLogin} >Login</button>
+      <button onClick={handleLogin}>Login</button>
       <div className="register-label">
         <Link to="/register" style={{ textDecoration: "none", color: "white" }}>
           No account? Click here to register.

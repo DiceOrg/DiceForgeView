@@ -1,9 +1,9 @@
 import { useState, useEffect, createContext } from "react";
 import { Route, Routes, Link, useNavigate, useLocation } from "react-router-dom";
-import Header from "./components/Header";
 import SignIn from "./pages/SignedOut/SignIn";
 import Register from "./pages/SignedOut/Register";
 import Home from "./pages/SignedIn/Home";
+import Header from "./components/Header";
 import "./App.css";
 import CharacterView from "./pages/SignedIn/Characters/components/CharacterView";
 import Cookies from "js-cookie";

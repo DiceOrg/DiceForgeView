@@ -299,7 +299,7 @@ body {
 
 .box-header {
   box-sizing: border-box;
-  background-color: #2e2e2d;
+  background-color: #606060;
 }
 
 .title {
@@ -316,4 +316,30 @@ body {
 .character-card {
   background-color: gray;
   padding: 1.25rem;
+}
+
+.character-header {
+  background-color: #727272;
+  margin-bottom: 5%;
+  display: flex;
+}
+.hit-points {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+
+}
+
+.hit-points > div{
+  margin-left: 10px;
+  justify-content: center;
+}
+
+.Character-header-right {
+  display: flex;
+  justify-content: center;
+}
+
+.Character-header-right > div {
+  margin-left: 10px;
 }
