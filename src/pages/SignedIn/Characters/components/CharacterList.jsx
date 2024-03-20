@@ -16,7 +16,7 @@ function CharacterList() {
 
     return (
         <>
-            <div className="row characters-row">
+            <div className="characters-row">
                 {characters.map((character, index) => (
                     <CharacterListItem character={character} key={index}/>
                 ))}

@@ -22,7 +22,7 @@ body {
 }
 
 .active {
-  color: #9c9c9c !important;
+  color: white !important;
 }
 
 .text-center {
@@ -31,6 +31,13 @@ body {
 
 .no-wrap {
   flex-wrap: nowrap !important;
+}
+
+.truncate-text {
+  white-space: nowrap;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  width: 100%;
 }
 
 .full-height {
@@ -351,12 +358,27 @@ body {
 }
 
 .characters-row {
+  display: flex;
+  flex-wrap: wrap;
   width: 100%;
-  column-gap: 1.25rem;
+  max-width: 75vw;
 }
 
 .character-column {
-  width: 33.3333%
+  padding: 0 !important;
+  margin: 10px;
+  box-sizing: border-box;
+  flex: 1 0 calc(100% - 20px); /* full width on mobile */
+}
+
+@media (min-width: 1024px) { /* Adjust the breakpoint as needed */
+  .character-column {
+    flex: 1 0 calc(50% - 20px); /* 4 columns on desktop */
+  }
+}
+
+.character-column:nth-child(2n) {
+  margin-right: auto; /* This will push the subsequent element to the next row */
 }
 
 .character-card {

@@ -1,7 +1,7 @@
 import { NavLink, useLocation } from 'react-router-dom';
 
 export default function Header() {
-    const color = "white";
+    const color = "#9c9c9c";
     const location = useLocation();
     const isActive = (path) => location.pathname === path;
 
