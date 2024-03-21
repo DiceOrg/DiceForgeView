@@ -571,6 +571,15 @@ body {
   border-top: 3px solid white;
 }
 
+.style-container {
+  margin-bottom: 15px;
+}
+
+.style-labelline {
+  padding-top: 10px;
+  border-top: 2px solid white;
+}
+
 .hit-points {
   display: flex;
   flex-flow: row wrap;
