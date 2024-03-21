@@ -29,7 +29,7 @@ export default function CharacterView() {
           </div>
         </div>
         <div className="column">
-          <CharacterHeader />
+          <CharacterHeader character={character} setCharacter={setCharacter}/>
         </div>
       </div>
       <div className="row">
