@@ -9,6 +9,7 @@ import CharacterView from "./pages/SignedIn/Characters/components/CharacterView"
 import Cookies from "js-cookie";
 import Characters from "./pages/SignedIn/Characters";
 
+
 const LoginContext = createContext();
 const DataContext = createContext();
 
@@ -85,9 +86,21 @@ function App() {
     }
   }
 
+  function isCookieExpired(cookieName) {
+    const cookieValue = Cookies.get(cookieName);
+    return cookieValue === undefined; // Returns true if the cookie has expired or does not exist
+  }
+
   useEffect(() => {
-    //Check if JWT is valid and if it is, input to user state username and email
-  }, []);
+    const isExpired = isCookieExpired('jwt');
+  
+    if (isExpired) {
+        console.log("Cookie has expired or does not exist");
+        navigate('/signin')
+    } else {
+        console.log("Cookie is still valid");
+    }
+    }, []);
 
   // useEffect(() => {
   //   if (!user && location.pathname !== "/register") {

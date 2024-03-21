@@ -75,8 +75,6 @@ export default function Skill({ skill_name, skill_ref, abilities, character, set
                         <input type="checkbox" name="exp" checked={skill.exp} onChange={(event) => changeSkill(event)} />
                     </div>
                 </div>
-
-
             </div>
         </div>
     );
