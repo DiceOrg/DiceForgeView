@@ -22,6 +22,10 @@ body {
   top: 50px;
 }
 
+.loading {
+  cursor: wait !important;
+}
+
 .center {
   position: relative;
   top: 50%;
@@ -83,8 +87,13 @@ body {
 
 .navbar {
   height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: row;
+}
+
+.navbar > :last-child {
+  margin-left: auto;
 }
 
 .nav-item-container {
@@ -560,6 +569,15 @@ body {
 .character-header-labelline {
   margin: 5px 0;
   border-top: 3px solid white;
+}
+
+.style-container {
+  margin-bottom: 15px;
+}
+
+.style-labelline {
+  padding-top: 10px;
+  border-top: 2px solid white;
 }
 
 .hit-points {
