@@ -12,16 +12,16 @@ export default function CharacterCreate() {
             console.log(name);
             const jwtToken = Cookies.get('jwt');
 
-            await fetch(`https://localhost:7256/character/?name=${name}`, {
+            const result = await fetch(`https://localhost:7256/character/?name=${name}`, {
                 method: 'POST',
                 headers: {
                     'accept': "*/*",
                     'Authorization': `Bearer ${jwtToken}`,
                 }
             }
-            ).then(res => res.json()).then(console.log);
+            ).then(res => res.json());
             
-            navigate("/Characters");
+            navigate(`/Characters/${result.id}`);
 
         } catch (error) {
             console.error('Error fetching data:', error.message);
