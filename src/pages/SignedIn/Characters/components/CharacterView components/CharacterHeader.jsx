@@ -3,29 +3,31 @@ import React, { useEffect, useState } from "react";
 
 function CharacterHeader({ character, setCharacter }) {
   const [speed, setSpeed] = useState(character.speed.value);
-  const [hitPoints, setHitPoints] = useState(30)
-  //console.log(character.HitPoints.current)
+  const [hitPoints, setHitPoints] = useState(30);
   async function updateSpeed() {
     try {
-      const jwtToken = Cookies.get('jwt');
+      const jwtToken = Cookies.get("jwt");
 
-      const response = await fetch(`https://localhost:7256/character/Speed/${character.speed.id}`, {
-        method: 'PUT',
-        headers: {
-          'Authorization': `Bearer ${jwtToken}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ value: speed }),
-      });
+      const response = await fetch(
+        `https://localhost:7256/character/Speed/${character.speed.id}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${jwtToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ value: speed }),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
-        console.log('Chaaaaange')
+        console.log("Chaaaaange");
       } else {
-        console.error('Failed to fetch data:', response.statusText);
+        console.error("Failed to fetch data:", response.statusText);
       }
     } catch (error) {
-      console.error('Error fetching data:', error.message);
+      console.error("Error fetching data:", error.message);
     }
   }
 
@@ -33,22 +35,20 @@ function CharacterHeader({ character, setCharacter }) {
     try {
       const { value } = event.target;
 
-      const newSpeed = value === '' ? 0 : parseInt(value, 10);
+      const newSpeed = value === "" ? 0 : parseInt(value, 10);
 
       setSpeed(newSpeed);
-
     } catch (error) {
-      console.error('Error updating speed:', error);
+      console.error("Error updating speed:", error);
     }
   };
-
 
   useEffect(() => {
     async function updateSpeedEffect() {
       try {
         await updateSpeed();
       } catch (error) {
-        console.error('Error updating speed:', error);
+        console.error("Error updating speed:", error);
       }
     }
 
@@ -56,8 +56,6 @@ function CharacterHeader({ character, setCharacter }) {
       updateSpeedEffect();
     }
   }, [speed]);
-
-
 
   return (
     <>
@@ -69,32 +67,51 @@ function CharacterHeader({ character, setCharacter }) {
             </div>
             <div className="row size-4">
               <div className="column text-center">
-                <input type="text" name="value" value="s"></input>
+                <input
+                  type="text"
+                  name="value"
+                  value={character.hitPoints.current}
+                ></input>
                 <div>Current</div>
               </div>
               <div className="column text-center">
-                <div className="value">0</div>
+                <input
+                  type="text"
+                  name="value"
+                  value={character.hitPoints.max}
+                ></input>
                 <div>Max</div>
               </div>
               <div className="column text-center">
-                <div className="value">0</div>
+                <input
+                  type="text"
+                  name="value"
+                  value={character.hitPoints.temp}
+                ></input>
                 <div>Temp</div>
               </div>
             </div>
           </div>
-          <div className="character-header-labelline text-center">Hit Points</div>
+          <div className="character-header-labelline text-center">
+            Hit Points
+          </div>
         </div>
 
         <div className="column text-center size-6">
-          <input type="text" name="value" value="s"></input>
+          <input type="text" name="value" value="0"></input>
           <div>AC</div>
         </div>
         <div className="column text-center size-6">
-          <input type="text" name="value" value="s"></input>
+          <input type="text" name="value" value="0"></input>
           <div>Initiative</div>
         </div>
         <div className="column text-center size-6">
-          <input type="text" name="value" value={speed} onChange={changeSpeed}></input>
+          <input
+            type="text"
+            name="value"
+            value={speed}
+            onChange={changeSpeed}
+          ></input>
           <div>Speed</div>
         </div>
       </div>
