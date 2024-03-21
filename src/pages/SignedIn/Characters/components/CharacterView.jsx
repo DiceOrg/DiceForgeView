@@ -1,9 +1,9 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import { DataContext } from "../../../../App";
-import CharacterHeader from "./CharacterHeader";
+import Skills from "../../Skills";
+import CharacterHeader from "./CharacterView components/CharacterHeader";
 import AbilityScoresList from "./CharacterView components/AbilityScoresList";
-import { SkillList } from "./CharacterView components/SkillList";
 
 export default function CharacterView() {
     const { id } = useParams();
@@ -27,7 +27,7 @@ export default function CharacterView() {
           </div>
         </div>
         <div className="column">
-            <CharacterHeader character={character} setCharacter={setCharacter}/>
+            <CharacterHeader/>
         </div>
       </div>
       <div className="row">
@@ -97,7 +97,16 @@ export default function CharacterView() {
               <h5 className="title">Skills</h5>
             </header>
             <div className="content">
-                <SkillList character={character} setCharacter={setCharacter}/>
+              {Object.keys(character.skills).map((skill, key) => (
+                <Skills
+                  skill={character.skills[skill]}
+                  skill_name={skill}
+                  key={key}
+                  abilities={character.abilities}
+                  setCharacter={setCharacter}
+                  character={character}
+                />
+              ))}
             </div>
           </div>
           <div className="box">
