@@ -10,7 +10,7 @@ export default function Header() {
 
     function signOut() {
         console.log(Cookies.get('jwt'));
-        Cookies.remove('jwt')
+        Cookies.remove('jwt');
         setUser();
     }
 
