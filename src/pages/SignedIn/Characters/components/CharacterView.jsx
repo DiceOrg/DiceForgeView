@@ -33,7 +33,7 @@ export default function CharacterView() {
           <CharacterHeader character={character} setCharacter={setCharacter} />
         </div>
       </div>
-      <div className="row">
+      <div className="row style-container">
         <Style character={character} setCharacter={setCharacter} />
       </div>
       <div className="row">
