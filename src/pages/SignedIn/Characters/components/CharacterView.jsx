@@ -2,9 +2,10 @@ import { useState, useEffect, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import { DataContext } from "../../../../App";
 import SkillList from "./CharacterView components/SkillList";
+import CharacterStyleHeader from "./CharacterView components/CharacterStyleHeader";
 import CharacterHeader from "./CharacterView components/CharacterHeader";
 import AbilityScoresList from "./CharacterView components/AbilityScoresList";
-import { Style } from "./CharacterView components/Style";
+import Style from "./CharacterView components/Style";
 import Spells from "../../Spells";
 import Equipment from "../Equipment/Equipment";
 
@@ -23,14 +24,17 @@ export default function CharacterView() {
   return (
     <div className="container">
       <div className="row">
-        <div className="column">
+        <div className="column size-3">
           <div className="box">
-            <Style character={character} setCharacter={setCharacter} />
+            <CharacterStyleHeader character={character} setCharacter={setCharacter} />
           </div>
         </div>
-        <div className="column">
-          <CharacterHeader character={character} setCharacter={setCharacter}/>
+        <div className="column size-4">
+          <CharacterHeader character={character} setCharacter={setCharacter} />
         </div>
+      </div>
+      <div className="row">
+        <Style character={character} setCharacter={setCharacter} />
       </div>
       <div className="row">
         <div className="column size-1">
@@ -57,7 +61,7 @@ export default function CharacterView() {
           <div className="box">
             <header className="box-header">
               <h5 className="title">Equipment</h5>
-              <Equipment/>
+              <Equipment />
             </header>
             <div className="content"></div>
           </div>
@@ -78,7 +82,7 @@ export default function CharacterView() {
           <div className="box">
             <header className="box-header">
               <h5 className="title">Spells</h5>
-              <Spells/>
+              <Spells />
             </header>
             <div className="content"></div>
           </div>
@@ -109,7 +113,7 @@ export default function CharacterView() {
               </div>
             </header>
             <div className="content">
-                <SkillList character={character} setCharacter={setCharacter}/>
+              <SkillList character={character} setCharacter={setCharacter} />
             </div>
           </div>
           <div className="box">

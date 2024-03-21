@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
 
-#root, body {
+#root,
+body {
   margin: 0;
   background-color: #0c0b04;
   color: white;
@@ -35,8 +36,8 @@ body {
 
 .truncate-text {
   white-space: nowrap;
-  overflow: hidden; 
-  text-overflow: ellipsis; 
+  overflow: hidden;
+  text-overflow: ellipsis;
   width: 100%;
 }
 
@@ -80,7 +81,7 @@ body {
   margin-left: 20px;
   height: 100%;
   width: auto;
-  position: relative; 
+  position: relative;
 }
 
 .nav-item-content {
@@ -138,11 +139,14 @@ body {
     height: 80% !important;
     font-size: 1.2em !important;
   }
+
   .labelline {
     font-size: 1.3em !important;
     padding: 0 4% !important;
   }
-  .sign-in-container input:focus + .labelline, .sign-in-container input.not-empty + .labelline {
+
+  .sign-in-container input:focus+.labelline,
+  .sign-in-container input.not-empty+.labelline {
     font-size: 1em !important;
     transform: translate(10%, -120%) !important;
   }
@@ -169,12 +173,14 @@ body {
     padding: 0 3% !important;
   }
 
-  .sign-in-container input:focus + .labelline, .sign-in-container input.not-empty + .labelline {
+  .sign-in-container input:focus+.labelline,
+  .sign-in-container input.not-empty+.labelline {
     font-size: 0.9em !important;
     transform: translate(10%, -100%) !important;
   }
 
-  .sign-in-container input:focus, .sign-in-container input.not-empty {
+  .sign-in-container input:focus,
+  .sign-in-container input.not-empty {
     border: 2.5px solid white !important;
   }
 }
@@ -210,11 +216,13 @@ body {
 
 }
 
-.sign-in-container input:focus, .sign-in-container input.not-empty {
+.sign-in-container input:focus,
+.sign-in-container input.not-empty {
   border: 4px solid white;
 }
 
-.sign-in-container input:focus + .labelline, .sign-in-container input.not-empty + .labelline {
+.sign-in-container input:focus+.labelline,
+.sign-in-container input.not-empty+.labelline {
   font-size: 1.1em;
   transform: translate(10%, -140%);
   z-index: 1111;
@@ -259,7 +267,7 @@ body {
   color: #0c0b04;
   background-color: white;
   transition: 0.1s ease;
-  cursor: pointer; 
+  cursor: pointer;
 }
 
 .container {
@@ -291,7 +299,7 @@ body {
   padding-bottom: 10px;
 }
 
-.column input[type="text"]{
+.column input[type="text"] {
   font-family: 'Lexend Deca', sans-serif;
   font-weight: 500;
   font-size: 18px;
@@ -307,7 +315,7 @@ body {
   padding: 0;
 }
 
-.column input[type="text"]:focus{
+.column input[type="text"]:focus {
   outline: none;
 }
 
@@ -356,7 +364,7 @@ body {
   text-align: left;
 }
 
-.skill-bonus{
+.skill-bonus {
   display: flex;
   flex: auto !important;
   box-sizing: border-box;
@@ -416,33 +424,38 @@ body {
   max-width: 25%;
 }
 
+.size-4 {
+  flex: 0 0 75%;
+  max-width: 75%;
+}
+
 @media (min-width: 576px) {
   .container {
     width: 540px !important;
     max-width: 100% !important;
   }
-} 
+}
 
 @media (min-width: 768px) {
   .container {
     width: 720px !important;
     max-width: 100% !important;
   }
-} 
+}
 
 @media (min-width: 992px) {
   .container {
     width: 960px !important;
     max-width: 100% !important;
   }
-} 
+}
 
 @media (min-width: 1200px) {
   .container {
     width: 1140px !important;
     max-width: 100% !important;
   }
-} 
+}
 
 .box {
   background-color: #4b4b4b;
@@ -483,17 +496,22 @@ body {
   padding: 0 !important;
   margin: 10px;
   box-sizing: border-box;
-  flex: 1 0 calc(100% - 20px); /* full width on mobile */
+  flex: 1 0 calc(100% - 20px);
+  /* full width on mobile */
 }
 
-@media (min-width: 1024px) { /* Adjust the breakpoint as needed */
+@media (min-width: 1024px) {
+
+  /* Adjust the breakpoint as needed */
   .character-column {
-    flex: 1 0 calc(50% - 20px); /* 4 columns on desktop */
+    flex: 1 0 calc(50% - 20px);
+    /* 4 columns on desktop */
   }
 }
 
 .character-column:nth-child(2n) {
-  margin-right: auto; /* This will push the subsequent element to the next row */
+  margin-right: auto;
+  /* This will push the subsequent element to the next row */
 }
 
 .character-card {
@@ -511,6 +529,7 @@ body {
   margin-bottom: 5%;
   display: flex;
 }
+
 .hit-points {
   display: flex;
   flex-flow: row wrap;
@@ -518,7 +537,7 @@ body {
 
 }
 
-.hit-points > div{
+.hit-points>div {
   margin-left: 10px;
   justify-content: center;
 }
@@ -528,6 +547,6 @@ body {
   justify-content: center;
 }
 
-.Character-header-right > div {
+.Character-header-right>div {
   margin-left: 10px;
 }

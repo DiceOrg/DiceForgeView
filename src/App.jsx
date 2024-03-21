@@ -5,6 +5,7 @@ import Register from "./pages/SignedOut/Register";
 import Home from "./pages/SignedIn/Home";
 import Header from "./components/Header";
 import "./App.css";
+import CharacterCreate from "./pages/SignedIn/Characters/components/CharacterCreate";
 import CharacterView from "./pages/SignedIn/Characters/components/CharacterView";
 import Cookies from "js-cookie";
 import Characters from "./pages/SignedIn/Characters";
@@ -115,6 +116,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/characters" element={<Characters />} />
+            <Route path="/characters/new" element={<CharacterCreate />} />
             <Route path="/characters/:id" element={<CharacterView />} />
           </Routes>
         </LoginContext.Provider>

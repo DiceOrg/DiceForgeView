@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Cookies from 'js-cookie';
 
-export function Style({character, setCharacter}) {
+export default function Style({character, setCharacter}) {
     
     
     const [style, setStyle] = useState(character.style);
