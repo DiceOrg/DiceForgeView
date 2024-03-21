@@ -17,7 +17,7 @@ const DataContext = createContext();
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [user, setUser] = useState("s");
+  const [user, setUser] = useState();
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [registerData, setRegisterData] = useState({
     id: "",
@@ -89,29 +89,27 @@ function App() {
 
   function isCookieExpired(cookieName) {
     const cookieValue = Cookies.get(cookieName);
-    return cookieValue === undefined; // Returns true if the cookie has expired or does not exist
+    return cookieValue === undefined;
   }
 
   useEffect(() => {
-    const isExpired = isCookieExpired('jwt');
-  
-    if (isExpired) {
-        console.log("Cookie has expired or does not exist");
-        navigate('/characters')
-        
-    } else {
-        console.log("Cookie is still valid");
-        navigate('/signin')
+    const jwtToken = Cookies.get('jwt');
+    console.log(jwtToken)
+    if(jwtToken){
+      const isExpired = isCookieExpired('jwt');
+      if (isExpired) {
+        setUser();
+      } else {
+        setUser("user");
+      }
     }
-    }, []);
+    if (!user && location.pathname !== "/register") {
+      navigate("/signin", { replace: true });
+    } else if(user && location.pathname === "/signin" || user && location.pathname === "/register"){
+      navigate("/", { replace: true });
+    }
 
-  // useEffect(() => {
-  //   if (!user && location.pathname !== "/register") {
-  //     navigate("/signin", { replace: true });
-  //   } else if(user && location.pathname === "/signin" || user && location.pathname === "/register"){
-  //     navigate("/", { replace: true });
-  //   }
-  // }, [user, navigate]);
+  }, [user, navigate]);
 
   useEffect(() => {
     console.log(registerData)
@@ -124,7 +122,7 @@ function App() {
   return (
     <>
       <DataContext.Provider value={{ fetchCharacter: fetchCharacter, fetchAllCharacters: fetchAllCharacters }}>
-        <LoginContext.Provider value={{ loginData, setLoginData, registerData, setRegisterData, checkInput }}>
+        <LoginContext.Provider value={{ loginData, setLoginData, registerData, setRegisterData, checkInput, setUser }}>
           {user ? <Header /> : null}
           <Routes>
             <Route path="/" element={<Home />} />

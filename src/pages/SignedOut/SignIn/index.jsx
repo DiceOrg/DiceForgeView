@@ -1,12 +1,10 @@
+import Cookies from "js-cookie";
 import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { LoginContext } from "../../../App";
-import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
 
 export default function SignIn() {
-    const { loginData, setLoginData, checkInput } = useContext(LoginContext);
-    const navigate = useNavigate();
+    const { loginData, setLoginData, checkInput, setUser } = useContext(LoginContext);
 
 
     console.log(loginData);
@@ -24,7 +22,7 @@ export default function SignIn() {
                 // Handle successful login, e.g., store token in local storage
                 console.log(data);
                 Cookies.set("jwt", data.token);
-                navigate('/characters')
+                setUser(loginData.email)
             } else {
                 // Handle error response
                 console.error("Login failed:", response.statusText);

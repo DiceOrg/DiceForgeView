@@ -1,8 +1,19 @@
+import Cookies from "js-cookie";
+import { useContext } from "react";
 import { NavLink, useLocation } from 'react-router-dom';
+import { LoginContext } from "../App";
 
 export default function Header() {
+    const { setUser } = useContext(LoginContext);
     const color = "#9c9c9c";
     const location = useLocation();
+
+    function signOut() {
+        console.log("cookie");
+        console.log(Cookies.get('jwt'));
+        Cookies.remove('jwt');
+        setUser();
+    }
 
     return (
         <header className="header">
@@ -33,6 +44,11 @@ export default function Header() {
                         </div>
                     </div>
                 </NavLink>
+                <div className="nav-item-container" onClick={signOut}>
+                    <div className="nav-item-content">
+                        <h3>Sign Out</h3>
+                    </div>
+                </div>
             </div>
         </header>
     );
