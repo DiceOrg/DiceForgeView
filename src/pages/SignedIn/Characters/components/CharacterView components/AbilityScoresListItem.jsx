@@ -6,44 +6,44 @@ export default function AbilityScoresListItem({ ability_name, ability_ref, setCh
     let prof_value = 2;
 
     const [ability, setAbility] = useState(ability_ref);
+    const [alteration, setAlteration] = useState(false);
 
     async function updateAbility() {
         try {
-            console.log("started")
           const jwtToken = Cookies.get('jwt');
     
-          const response = await fetch(`https://localhost:7256/character/Ability/${ability.id}`, {
+          await fetch(`https://localhost:7256/character/Ability/${ability.id}`, {
             method: 'PUT',
             headers: {
+              'accept': "*/*",
               'Authorization': `Bearer ${jwtToken}`,
               'Content-Type': 'application/json'
             }, 
-            body: JSON.stringify(ability),
-          });
-          console.log("finished", response);
-    
-          if (response.ok) {
-            const data = await response.json();
-            console.log('Data, abliity:', data, ability);
-          } else {
-            console.error('Failed to fetch data:', response.statusText);
-          }
+            body: JSON.stringify(ability)
+        }
+        ).then(res => res.json());
+
         } catch (error) {
           console.error('Error fetching data:', error.message);
         }
     }
 
     useEffect(() => {
-        updateAbility();
-    }, [ability])
+        // do not update with empty string, and if alteration has been made
+        if ( alteration && ability.value.length != 0 ){
+            updateAbility();
+            setAlteration(false);
+        }
+    }, [alteration])
 
     const change = (event) => {
     const { name, value } = event.target;
         let objectToChange = { ...character };
         if (name == "prof"){
-            objectToChange.abilities[ability_name].prof ^= true;
+            let valueToChange = objectToChange.abilities[ability_name].prof;
+            objectToChange.abilities[ability_name].prof = !valueToChange;
         }else if (name == "value" && !isNaN(value)){
-            objectToChange.abilities[ability_name].value = value;
+            objectToChange.abilities[ability_name].value = Number(value);
             if ( value > 30){
                 objectToChange.abilities[ability_name].value = 30;
             }else if (value < 0){
@@ -54,7 +54,7 @@ export default function AbilityScoresListItem({ ability_name, ability_ref, setCh
             return;
         setCharacter(objectToChange);
         setAbility(objectToChange.abilities[ability_name]);
-        console.log("change", objectToChange.abilities[ability_name])
+        setAlteration(true);
     }
 
     return (
