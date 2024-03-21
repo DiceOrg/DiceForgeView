@@ -3,6 +3,8 @@ import { DataContext } from "../../../../App";
 import CharacterHeader from "./CharacterHeader";
 import AbilityScoresList from "./CharacterView components/AbilityScoresList";
 import { SkillList } from "./CharacterView components/SkillList";
+import Spells from "../../Spells";
+import Equipment from "../Equipment/Equipment";
 
 export default function CharacterView() {
     const { fetchCharacter } = useContext(DataContext)
@@ -53,6 +55,7 @@ export default function CharacterView() {
           <div className="box">
             <header className="box-header">
               <h5 className="title">Equipment</h5>
+              <Equipment/>
             </header>
             <div className="content"></div>
           </div>
@@ -73,6 +76,7 @@ export default function CharacterView() {
           <div className="box">
             <header className="box-header">
               <h5 className="title">Spells</h5>
+              <Spells/>
             </header>
             <div className="content"></div>
           </div>
