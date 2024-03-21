@@ -108,7 +108,7 @@ function App() {
     }
     if (!signedIn && location.pathname !== "/register") {
       navigate("/signin", { replace: true });
-    } else if(signedIn && location.pathname === "/signin" || user && location.pathname === "/register"){
+    } else if(signedIn && location.pathname === "/signin" || signedIn && location.pathname === "/register"){
       navigate("/", { replace: true });
     }
 
