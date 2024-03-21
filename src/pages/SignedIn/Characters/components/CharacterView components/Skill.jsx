@@ -10,7 +10,6 @@ export default function Skill({skill_name, skill_ref, abilities, character, setC
     async function updateSkill() {
         try {
           const jwtToken = Cookies.get('jwt');
-          console.log(jwtToken);
     
           await fetch(`https://localhost:7256/character/Skill/${skill.id}`, {
             method: 'PUT',
@@ -35,7 +34,6 @@ export default function Skill({skill_name, skill_ref, abilities, character, setC
 
     // inverts checkbox
     const changeSkill = (event) => {
-        console.log("does not happen?");
         const {name} = event.target;
         let objectToChange = {...character};
         objectToChange.skills[skill_name][name] = !skill[name];

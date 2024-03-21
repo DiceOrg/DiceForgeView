@@ -5,6 +5,7 @@ import Skills from "../../Skills";
 import CharacterHeader from "./CharacterView components/CharacterHeader";
 import AbilityScoresList from "./CharacterView components/AbilityScoresList";
 import { SkillList } from "./CharacterView components/SkillList";
+import { Style } from "./CharacterView components/Style";
 
 export default function CharacterView() {
     const { id } = useParams();
@@ -23,8 +24,7 @@ export default function CharacterView() {
       <div className="row">
         <div className="column">
           <div className="box">
-            <h2>{character.name}</h2>
-            <h3>{character.style.race}</h3>
+            <Style character={character} setCharacter={setCharacter} />
           </div>
         </div>
         <div className="column">

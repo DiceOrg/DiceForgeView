@@ -34,7 +34,7 @@ export default function AbilityScoresListItem({ ability_name, ability_ref, setCh
             updateAbility();
             setAlteration(false);
         }
-    }, [alteration])
+    }, [alteration]);
 
     const changeAbility = (event) => {
     const { name, value } = event.target;
