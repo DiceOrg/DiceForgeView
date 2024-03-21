@@ -7,10 +7,10 @@ export default function Skill({skill_name, skill_ref, abilities, character, setC
     const [alteration, setAlteration] = useState(false);
 
 
-
     async function updateSkill() {
         try {
           const jwtToken = Cookies.get('jwt');
+          console.log(jwtToken);
     
           await fetch(`https://localhost:7256/character/Skill/${skill.id}`, {
             method: 'PUT',
@@ -34,7 +34,8 @@ export default function Skill({skill_name, skill_ref, abilities, character, setC
     let skill_value = abilities[skill.attribute.toLowerCase()].value;
 
     // inverts checkbox
-    const change = (event) => {
+    const changeSkill = (event) => {
+        console.log("does not happen?");
         const {name} = event.target;
         let objectToChange = {...character};
         objectToChange.skills[skill_name][name] = !skill[name];
@@ -49,14 +50,14 @@ export default function Skill({skill_name, skill_ref, abilities, character, setC
             updateSkill();
             setAlteration(false);
         }
-    }, [alteration])
+    }, [alteration, skill])
 
     return (
         <div className="row">
             <span>
                 {Math.floor((skill_value - 10)/2 + prof_value*skill.prof + exp_value*skill.exp)} {skill_name} ({skill.attribute.slice(0, 3)}) 
-                Prof: <input type="checkbox" name="prof" checked={skill.prof} onChange={(event) => change(event)}/>
-                Exp: <input type="checkbox" name="exp" checked={skill.exp} onChange={(event) => change(event)}/>
+                Prof: <input type="checkbox" name="prof" checked={skill.prof} onChange={(event) => changeSkill(event)}/> 
+                Exp: <input type="checkbox" name="exp" checked={skill.exp} onChange={(event) => changeSkill(event)}/>
             </span>
         </div>
     );
