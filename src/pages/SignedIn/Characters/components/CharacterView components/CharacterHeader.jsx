@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 function CharacterHeader({ character, setCharacter }) {
   const [speed, setSpeed] = useState(character.speed.value);
   const [hitPoints, setHitPoints] = useState(character.hitPoints);
+  const [alteration, setAlteration] = useState(false);
 
   async function updateSpeed() {
     try {
@@ -96,10 +97,11 @@ function CharacterHeader({ character, setCharacter }) {
       }
     }
 
-    if (hitPoints !== character.hitPoints) {
+    if (alteration) {
       updateHitPoints();
+      setAlteration(false);
     }
-  }, [hitPoints]);
+  }, [alteration]);
 
   const changeHitPoint = (event) => {
     const { name, value } = event.target;
@@ -112,6 +114,7 @@ function CharacterHeader({ character, setCharacter }) {
         return;
     setCharacter(objectToChange);
     setHitPoints(objectToChange.hitPoints);
+    setAlteration(true);
 }
 
   return (

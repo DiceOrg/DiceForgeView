@@ -112,7 +112,7 @@ function App() {
       navigate("/", { replace: true });
     }
 
-  // }, [user, navigate]);
+   }, [user, navigate]);
 
   useEffect(() => {
     console.log(registerData)
