@@ -13,13 +13,13 @@ export default function CharacterCreate() {
             const jwtToken = Cookies.get('jwt');
 
             await fetch(`https://localhost:7256/character/?name=${name}`, {
-                method: 'PUT',
+                method: 'POST',
                 headers: {
                     'accept': "*/*",
                     'Authorization': `Bearer ${jwtToken}`,
                 }
             }
-            ).then(res => res.json());
+            ).then(res => res.json()).then(console.log);
             
             navigate("/Characters");
 
