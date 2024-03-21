@@ -42,7 +42,7 @@ export default function CharacterView() {
             <header className="box-header">
               <h5 className="title">Ability Scores</h5>
             </header>
-            <div className="content">
+            <div className="content ability-scores">
                 <AbilityScoresList abilities={character.abilities} character={character} setCharacter={setCharacter}/>
             </div>
           </div>

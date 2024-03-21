@@ -271,6 +271,56 @@ body {
   padding: 1%;
 }
 
+.ability-scores {
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  text-shadow: 0px 0px 0.7px rgba(255, 255, 255, 0.5);
+}
+
+.score-column {
+  text-align: center;
+}
+
+.score-row {
+  margin: 5px 0;
+}
+
+.score-row:last-child {
+  padding-bottom: 10px;
+}
+
+.column input[type="text"]{
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  text-shadow: 0px 0px 0.7px rgba(255, 255, 255, 0.5);
+
+  width: 100%;
+  color: white;
+  background-color: transparent;
+  border-radius: 0 !important;
+  border: 0 solid black;
+  border-bottom: 1px solid white;
+  text-align: center;
+  padding: 0;
+}
+
+.column input[type="text"]:focus{
+  outline: none;
+}
+
+.column .value {
+  font-weight: 500;
+  font-size: 18px;
+  border: 0 solid black;
+  border-bottom: 1px solid white;
+}
+
+.score-name {
+  font-weight: 800 !important;
+}
+
 .column {
   box-sizing: border-box;
   width: 100%;
