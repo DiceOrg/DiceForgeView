@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 
 function CharacterHeader({character, setCharacter}) {
-  const [speed, setSpeed] = useState('');
+  const [speed, setSpeed] = useState(character.speed.value);
 
   async function updateSpeed() {
     try {
@@ -19,8 +19,7 @@ function CharacterHeader({character, setCharacter}) {
       
       if (response.ok) {
         const data = await response.json();
-        console.log('Speed changed:', data)
-        //setSpeed(speed)
+        console.log('Chaaaaange')
       } else {
         console.error('Failed to fetch data:', response.statusText);
       }
@@ -29,24 +28,34 @@ function CharacterHeader({character, setCharacter}) {
     }
   }
 
-  useEffect(() => {
-    updateSpeed
-  }, [speed])
-
   const changeSpeed = async (event) => {
     try {
       const { value } = event.target;
-      console.log(value);
-  
-      // Update the speed state
-      setSpeed(value);
-  
-      // Send PUT request to update speed in the API
-      await updateSpeed();
+
+      const newSpeed = value === '' ? 0 : parseInt(value, 10);
+
+      setSpeed(newSpeed);
+
     } catch (error) {
       console.error('Error updating speed:', error);
     }
   };
+
+  useEffect(() => {
+    async function updateSpeedEffect() {
+      try {
+        // Send PUT request to update speed in the API
+        await updateSpeed();
+      } catch (error) {
+        console.error('Error updating speed:', error);
+      }
+    }
+  
+    if (speed !== character.speed.value) {
+      updateSpeedEffect();
+    }
+  }, [speed]);
+
   return (
     <>
       <div className="character-header">
@@ -85,9 +94,7 @@ function CharacterHeader({character, setCharacter}) {
             value={speed}
             onChange={changeSpeed}
             />
-            
             <p>Speed</p>
-            <p>{speed}</p>
           </div>
         </div>
       </div>
