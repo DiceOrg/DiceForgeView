@@ -96,9 +96,11 @@ function App() {
   
     if (isExpired) {
         console.log("Cookie has expired or does not exist");
-        navigate('/signin')
+        navigate('/characters')
+        
     } else {
         console.log("Cookie is still valid");
+        navigate('/signin')
     }
     }, []);
 
