@@ -340,20 +340,50 @@ body {
   justify-content: space-between;
 }
 
+.full-skill-row {
+  padding: 2px;
+}
+
+.full-skill-row:last-child {
+  padding-bottom: 5px;
+}
+
 .skill-left {
+  display: flex;
+  flex: auto !important;
   box-sizing: border-box;
   width: 70% !important;
   text-align: left;
 }
 
+.skill-bonus{
+  display: flex;
+  flex: auto !important;
+  box-sizing: border-box;
+  width: 10% !important;
+  text-align: right;
+  justify-content: right;
+}
+
+.skill-title {
+  display: flex;
+  flex: auto !important;
+  box-sizing: border-box;
+  width: 90% !important;
+  text-align: left;
+}
+
 .skill-right {
+  display: flex;
+  flex: auto !important;
   box-sizing: border-box;
   width: 30% !important;
   text-align: right;
 }
 
-.skill-right input {
-  text-align: center;
+.skill-input-column {
+  display: flex;
+  justify-content: center;
 }
 
 .column {

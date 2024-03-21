@@ -6,6 +6,13 @@ export default function Skill({ skill_name, skill_ref, abilities, character, set
     const [skill, setSkill] = useState(skill_ref);
     const [alteration, setAlteration] = useState(false);
 
+    function transformTitle(title) {
+        const result = title
+            .replace(/([a-z])([A-Z])/g, '$1 $2')
+            .replace(/^./, str => str.toUpperCase());
+        return result;
+    }
+
     async function updateSkill() {
         try {
             const jwtToken = Cookies.get('jwt');
@@ -50,11 +57,25 @@ export default function Skill({ skill_name, skill_ref, abilities, character, set
     }, [alteration])
 
     return (
-        <div className="row skill-row">
-            <div className="column skill-left">{Math.floor((skill_value - 10) / 2 + prof_value * skill.prof + exp_value * skill.exp)} {skill_name} ({skill.attribute.slice(0, 3)}) </div>
+        <div className="row skill-row full-skill-row">
+            <div className="column skill-left">
+                <div className="row skill-row">
+                    <div className="column skill-bonus">{Math.floor((skill_value - 10) / 2 + prof_value * skill.prof + exp_value * skill.exp)}</div>
+                    <div className="column skill-title">{transformTitle(skill_name)} ({skill.attribute.slice(0, 3)}) </div>
+                </div>
+            </div>
+
             <div className="column skill-right">
-                <input type="checkbox" name="prof" checked={skill.prof} onChange={(event) => change(event)} />
-                <input type="checkbox" name="exp" checked={skill.exp} onChange={(event) => change(event)} />
+                <div className="row skill-row">
+                    <div className="column skill-input-column">
+                        <input type="checkbox" name="prof" checked={skill.prof} onChange={(event) => change(event)} />
+                    </div>
+                    <div className="column skill-input-column">
+                        <input type="checkbox" name="exp" checked={skill.exp} onChange={(event) => change(event)} />
+                    </div>
+                </div>
+
+
             </div>
         </div>
     );
