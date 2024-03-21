@@ -72,7 +72,7 @@ export default function AbilityScoresListItem({ ability_name, ability_ref, setCh
                 <div>Mod</div>
             </div>
             <div className="column text-center">
-                <input type="checkbox" name="prof" checked={ability.prof} onChange={(event) => change(event)} />
+                <div className="value"><input type="checkbox" name="prof" checked={ability.prof} onChange={(event) => change(event)} /></div>
                 <div>Prof</div>
             </div>
             <div className="column text-center">
