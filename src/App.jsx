@@ -92,24 +92,24 @@ function App() {
     return cookieValue === undefined;
   }
 
-  useEffect(() => {
-    const jwtToken = Cookies.get('jwt');
-    console.log(jwtToken)
-    if(jwtToken){
-      const isExpired = isCookieExpired('jwt');
-      if (isExpired) {
-        setUser();
-      } else {
-        setUser("user");
-      }
-    }
-    if (!user && location.pathname !== "/register") {
-      navigate("/signin", { replace: true });
-    } else if(user && location.pathname === "/signin" || user && location.pathname === "/register"){
-      navigate("/", { replace: true });
-    }
+  // useEffect(() => {
+  //   const jwtToken = Cookies.get('jwt');
+  //   console.log(jwtToken)
+  //   if(jwtToken){
+  //     const isExpired = isCookieExpired('jwt');
+  //     if (isExpired) {
+  //       setUser();
+  //     } else {
+  //       setUser("user");
+  //     }
+  //   }
+  //   if (!user && location.pathname !== "/register") {
+  //     navigate("/signin", { replace: true });
+  //   } else if(user && location.pathname === "/signin" || user && location.pathname === "/register"){
+  //     navigate("/", { replace: true });
+  //   }
 
-  }, [user, navigate]);
+  // }, [user, navigate]);
 
   useEffect(() => {
     console.log(registerData)
