@@ -81,11 +81,11 @@ function CharacterHeader({character, setCharacter}) {
         </div>
         <div className="Character-header-right">
           <div>
-            <p>16</p>
+            <input type="text" />
             <p>AC</p>
           </div>
           <div>
-            <p>3</p>
+            <input type="text" />
             <p>Initiativ</p>
           </div>
           <div>
