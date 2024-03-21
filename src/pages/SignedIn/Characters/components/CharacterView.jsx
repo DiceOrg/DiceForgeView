@@ -23,9 +23,9 @@ export default function CharacterView() {
 
   return (
     <div className="container">
-      <div className="row">
+      <div className="row character-header-row">
         <div className="column size-3">
-          <div className="box">
+          <div className="title-box">
             <CharacterStyleHeader character={character} setCharacter={setCharacter} />
           </div>
         </div>

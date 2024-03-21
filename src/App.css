@@ -22,6 +22,16 @@ body {
   top: 50px;
 }
 
+.center {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.no-margin {
+  margin: 0;
+}
+
 .active {
   color: white !important;
 }
@@ -429,6 +439,16 @@ body {
   max-width: 75%;
 }
 
+.size-5 {
+  flex: 0 0 50%;
+  max-width: 50;
+}
+
+.size-6 {
+  flex: 0 0 16.666667%;
+  max-width: 16.666667%;
+}
+
 @media (min-width: 576px) {
   .container {
     width: 540px !important;
@@ -455,6 +475,10 @@ body {
     width: 1140px !important;
     max-width: 100% !important;
   }
+}
+
+.title-box h1, h2, h3, h4, h5, h6{
+  margin: 0;
 }
 
 .box {
@@ -520,10 +544,21 @@ body {
   cursor: pointer;
 }
 
-.character-header {
-  background-color: #727272;
-  margin-bottom: 5%;
+.character-header-row {
   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.character-header-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.character-header-labelline {
+  margin: 5px 0;
+  border-top: 3px solid white;
 }
 
 .hit-points {
