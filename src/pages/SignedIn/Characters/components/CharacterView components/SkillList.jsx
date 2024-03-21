@@ -2,9 +2,6 @@ import React from 'react'
 import Skill from "./Skill.jsx"
 
 export default function SkillList({setCharacter, character}) {
-    
-
-    console.log("skill", character.skills)
 
     return (
         <>

@@ -13,6 +13,7 @@ export default function Skill({ skill_name, skill_ref, abilities, character, set
         return result;
     }
 
+
     async function updateSkill() {
         try {
             const jwtToken = Cookies.get('jwt');
@@ -39,7 +40,7 @@ export default function Skill({ skill_name, skill_ref, abilities, character, set
     let skill_value = abilities[skill.attribute.toLowerCase()].value;
 
     // inverts checkbox
-    const change = (event) => {
+    const changeSkill = (event) => {
         const { name } = event.target;
         let objectToChange = { ...character };
         objectToChange.skills[skill_name][name] = !skill[name];
@@ -54,7 +55,7 @@ export default function Skill({ skill_name, skill_ref, abilities, character, set
             updateSkill();
             setAlteration(false);
         }
-    }, [alteration])
+    }, [alteration, skill])
 
     return (
         <div className="row skill-row full-skill-row">
@@ -68,10 +69,10 @@ export default function Skill({ skill_name, skill_ref, abilities, character, set
             <div className="column skill-right">
                 <div className="row skill-row">
                     <div className="column skill-input-column">
-                        <input type="checkbox" name="prof" checked={skill.prof} onChange={(event) => change(event)} />
+                        <input type="checkbox" name="prof" checked={skill.prof} onChange={(event) => changeSkill(event)} /> 
                     </div>
                     <div className="column skill-input-column">
-                        <input type="checkbox" name="exp" checked={skill.exp} onChange={(event) => change(event)} />
+                        <input type="checkbox" name="exp" checked={skill.exp} onChange={(event) => changeSkill(event)} />
                     </div>
                 </div>
 

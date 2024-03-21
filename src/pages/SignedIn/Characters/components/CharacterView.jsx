@@ -4,6 +4,10 @@ import { DataContext } from "../../../../App";
 import SkillList from "./CharacterView components/SkillList";
 import CharacterHeader from "./CharacterView components/CharacterHeader";
 import AbilityScoresList from "./CharacterView components/AbilityScoresList";
+import { SkillList } from "./CharacterView components/SkillList";
+import { Style } from "./CharacterView components/Style";
+import Spells from "../../Spells";
+import Equipment from "../Equipment/Equipment";
 
 export default function CharacterView() {
   const { id } = useParams();
@@ -22,12 +26,11 @@ export default function CharacterView() {
       <div className="row">
         <div className="column">
           <div className="box">
-            <h2>{character.name}</h2>
-            <h3>{character.style.race}</h3>
+            <Style character={character} setCharacter={setCharacter} />
           </div>
         </div>
         <div className="column">
-          <CharacterHeader />
+          <CharacterHeader character={character} setCharacter={setCharacter}/>
         </div>
       </div>
       <div className="row">
@@ -55,6 +58,7 @@ export default function CharacterView() {
           <div className="box">
             <header className="box-header">
               <h5 className="title">Equipment</h5>
+              <Equipment/>
             </header>
             <div className="content"></div>
           </div>
@@ -75,6 +79,7 @@ export default function CharacterView() {
           <div className="box">
             <header className="box-header">
               <h5 className="title">Spells</h5>
+              <Spells/>
             </header>
             <div className="content"></div>
           </div>
@@ -105,7 +110,7 @@ export default function CharacterView() {
               </div>
             </header>
             <div className="content">
-              <SkillList character={character} setCharacter={setCharacter} />
+                <SkillList character={character} setCharacter={setCharacter}/>
             </div>
           </div>
           <div className="box">

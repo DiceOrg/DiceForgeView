@@ -2,8 +2,9 @@ import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 
 function CharacterHeader({character, setCharacter}) {
-  const [speed, setSpeed] = useState('');
-
+  const [speed, setSpeed] = useState(character.speed.value);
+  const [hitPoints, setHitPoints] = useState(30)
+  
   async function updateSpeed() {
     try {
       const jwtToken = Cookies.get('jwt');
@@ -19,8 +20,7 @@ function CharacterHeader({character, setCharacter}) {
       
       if (response.ok) {
         const data = await response.json();
-        console.log('Speed changed:', data)
-        //setSpeed(speed)
+        console.log('Chaaaaange')
       } else {
         console.error('Failed to fetch data:', response.statusText);
       }
@@ -29,54 +29,79 @@ function CharacterHeader({character, setCharacter}) {
     }
   }
 
-  useEffect(() => {
-    updateSpeed
-  }, [speed])
-
   const changeSpeed = async (event) => {
     try {
       const { value } = event.target;
-      console.log(value);
-  
-      // Update the speed state
-      setSpeed(value);
-  
-      // Send PUT request to update speed in the API
-      await updateSpeed();
+
+      const newSpeed = value === '' ? 0 : parseInt(value, 10);
+
+      setSpeed(newSpeed);
+
     } catch (error) {
       console.error('Error updating speed:', error);
     }
   };
+
+
+  useEffect(() => {
+    async function updateSpeedEffect() {
+      try {
+        // Send PUT request to update speed in the API
+        await updateSpeed();
+      } catch (error) {
+        console.error('Error updating speed:', error);
+      }
+    }
+  
+    if (speed !== character.speed.value) {
+      updateSpeedEffect();
+    }
+  }, [speed]);
+
+  function Increase() {
+    const newHitPoints = hitPoints + 1;
+    setHitPoints(newHitPoints);
+  }
+
+  function Decrease() {
+    if (hitPoints > 0) {
+      const newHitPoints = hitPoints - 1;
+      setHitPoints(newHitPoints);
+    }
+  }
+
+
+
   return (
     <>
       <div className="character-header">
         <div className="hit-points">
           <div className="hp">
-            <button>+</button>
-            <button>-</button>
-            <h2>50</h2>
+            <button onClick={Increase}>+</button>
+            <button onClick={Decrease}>-</button>
+            <h2>{hitPoints}</h2>
             <p>HP</p>
           </div>
           <div>
-            <p>36</p>
+            <input type="text" />
             <p>Current</p>
           </div>
           <div>
-            <p>50</p>
+            <input type="text" />
             <p>Max</p>
           </div>
           <div>
-            <p>0</p>
+          <input type="text" />
             <p>temp</p>
           </div>
         </div>
         <div className="Character-header-right">
           <div>
-            <p>16</p>
+            <input type="text" />
             <p>AC</p>
           </div>
           <div>
-            <p>3</p>
+            <input type="text" />
             <p>Initiativ</p>
           </div>
           <div>
@@ -85,9 +110,7 @@ function CharacterHeader({character, setCharacter}) {
             value={speed}
             onChange={changeSpeed}
             />
-            
             <p>Speed</p>
-            <p>{speed}</p>
           </div>
         </div>
       </div>

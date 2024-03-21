@@ -34,9 +34,9 @@ export default function AbilityScoresListItem({ ability_name, ability_ref, setCh
             updateAbility();
             setAlteration(false);
         }
-    }, [alteration])
+    }, [alteration]);
 
-    const change = (event) => {
+    const changeAbility = (event) => {
         const { name, value } = event.target;
         let objectToChange = { ...character };
         if (name == "prof") {
@@ -60,7 +60,7 @@ export default function AbilityScoresListItem({ ability_name, ability_ref, setCh
     return (
         <div className="row score-row no-wrap">
             <div className="column score-column">
-                <input type="text" name="value" value={ability.value} onChange={(event) => change(event)} />
+                <input type="text" name="value" value={ability.value} onChange={(event) => changeAbility(event)} />
                 <div>Score</div>
             </div>
             <div className="column text-center size-3">
@@ -72,7 +72,7 @@ export default function AbilityScoresListItem({ ability_name, ability_ref, setCh
                 <div>Mod</div>
             </div>
             <div className="column text-center">
-                <div className="value"><input type="checkbox" name="prof" checked={ability.prof} onChange={(event) => change(event)} /></div>
+                <div className="value"><input type="checkbox" name="prof" checked={ability.prof} onChange={(event) => changeAbility(event)} /></div>
                 <div>Prof</div>
             </div>
             <div className="column text-center">
