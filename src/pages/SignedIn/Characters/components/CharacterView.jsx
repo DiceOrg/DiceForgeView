@@ -1,21 +1,21 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import { DataContext } from "../../../../App";
-import Skills from "../../Skills";
+import SkillList from "./CharacterView components/SkillList";
 import CharacterHeader from "./CharacterView components/CharacterHeader";
 import AbilityScoresList from "./CharacterView components/AbilityScoresList";
 
 export default function CharacterView() {
-    const { id } = useParams();
-    const { fetchCharacter } = useContext(DataContext)
-    const [character, setCharacter] = useState();
-    
-    useEffect(() => {
-        fetchCharacter(id, setCharacter);
-      }, [])
+  const { id } = useParams();
+  const { fetchCharacter } = useContext(DataContext)
+  const [character, setCharacter] = useState();
 
-    if (character == null)
-        return <>loading...</>
+  useEffect(() => {
+    fetchCharacter(id, setCharacter);
+  }, [])
+
+  if (character == null)
+    return <>loading...</>
 
   return (
     <div className="container">
@@ -27,7 +27,7 @@ export default function CharacterView() {
           </div>
         </div>
         <div className="column">
-            <CharacterHeader/>
+          <CharacterHeader />
         </div>
       </div>
       <div className="row">
@@ -43,7 +43,7 @@ export default function CharacterView() {
               <h5 className="title">Ability Scores</h5>
             </header>
             <div className="content ability-scores">
-                <AbilityScoresList abilities={character.abilities} character={character} setCharacter={setCharacter}/>
+              <AbilityScoresList abilities={character.abilities} character={character} setCharacter={setCharacter} />
             </div>
           </div>
           <div className="box">
@@ -93,20 +93,19 @@ export default function CharacterView() {
         </div>
         <div className="column size-3">
           <div className="box">
-            <header className="box-header">
+            <header className="box-header skill-header">
               <h5 className="title">Skills</h5>
+              <div className="row skill-title-row">
+                <div className="column">
+                  Prof
+                </div>
+                <div className="column">
+                  Exp
+                </div>
+              </div>
             </header>
             <div className="content">
-              {Object.keys(character.skills).map((skill, key) => (
-                <Skills
-                  skill={character.skills[skill]}
-                  skill_name={skill}
-                  key={key}
-                  abilities={character.abilities}
-                  setCharacter={setCharacter}
-                  character={character}
-                />
-              ))}
+              <SkillList character={character} setCharacter={setCharacter} />
             </div>
           </div>
           <div className="box">
