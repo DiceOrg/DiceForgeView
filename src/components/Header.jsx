@@ -26,7 +26,7 @@ export default function Header() {
                         </div>
                     </div>
                 </NavLink>
-                <NavLink to="/characters/new" style={{ color: color, textDecoration: 'none' }} className={(navData) => (navData.isActive ? "active" : 'none')}>
+                <NavLink to="/new" style={{ color: color, textDecoration: 'none' }} className={(navData) => (navData.isActive ? "active" : 'none')}>
                     <div className="nav-item-container">
                         <div className="nav-item-content">
                             <h3>Create</h3>

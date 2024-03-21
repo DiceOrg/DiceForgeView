@@ -115,8 +115,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/signin" element={<SignIn />} />
+            <Route path="/new" element={<CharacterCreate />} />
             <Route path="/characters" element={<Characters />} />
-            <Route path="/characters/new" element={<CharacterCreate />} />
             <Route path="/characters/:id" element={<CharacterView />} />
           </Routes>
         </LoginContext.Provider>
