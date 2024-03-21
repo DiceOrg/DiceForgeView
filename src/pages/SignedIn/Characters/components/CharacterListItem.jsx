@@ -4,7 +4,7 @@ export default function CharacterListItem({ character }) {
     const navigate = useNavigate();
 
     const id = character.id;
-    const name = character.name;
+    const name = character.style.name;
     const race = character.style.race;
     const class_ = character.style.class_;
 

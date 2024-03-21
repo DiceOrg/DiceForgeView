@@ -4,6 +4,8 @@ import { DataContext } from "../../../../App";
 import SkillList from "./CharacterView components/SkillList";
 import CharacterHeader from "./CharacterView components/CharacterHeader";
 import AbilityScoresList from "./CharacterView components/AbilityScoresList";
+import { SkillList } from "./CharacterView components/SkillList";
+import { Style } from "./CharacterView components/Style";
 import Spells from "../../Spells";
 import Equipment from "../Equipment/Equipment";
 
@@ -24,8 +26,7 @@ export default function CharacterView() {
       <div className="row">
         <div className="column">
           <div className="box">
-            <h2>{character.name}</h2>
-            <h3>{character.style.race}</h3>
+            <Style character={character} setCharacter={setCharacter} />
           </div>
         </div>
         <div className="column">
@@ -109,7 +110,7 @@ export default function CharacterView() {
               </div>
             </header>
             <div className="content">
-              <SkillList character={character} setCharacter={setCharacter} />
+                <SkillList character={character} setCharacter={setCharacter}/>
             </div>
           </div>
           <div className="box">
