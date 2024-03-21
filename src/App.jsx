@@ -94,18 +94,21 @@ function App() {
 
   useEffect(() => {
     const jwtToken = Cookies.get('jwt');
+    let signedIn = false;
     console.log(jwtToken)
     if(jwtToken){
       const isExpired = isCookieExpired('jwt');
       if (isExpired) {
         setUser();
+        signedIn = false;
       } else {
         setUser("user");
+        signedIn = true;
       }
     }
-    if (!user && location.pathname !== "/register") {
+    if (!signedIn && location.pathname !== "/register") {
       navigate("/signin", { replace: true });
-    } else if(user && location.pathname === "/signin" || user && location.pathname === "/register"){
+    } else if(signedIn && location.pathname === "/signin" || user && location.pathname === "/register"){
       navigate("/", { replace: true });
     }
 

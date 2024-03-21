@@ -10,6 +10,7 @@ export default function SignIn() {
     console.log(loginData);
     const handleLogin = async () => {
         try {
+            document.body.classList.add('loading');
             const response = await fetch("https://localhost:7256/api/users/login", {
                 method: "POST",
                 headers: {
@@ -22,9 +23,11 @@ export default function SignIn() {
                 // Handle successful login, e.g., store token in local storage
                 console.log(data);
                 Cookies.set("jwt", data.token);
+                document.body.classList.remove('loading');
                 setUser(loginData.email)
             } else {
                 // Handle error response
+                document.body.classList.remove('loading');
                 console.error("Login failed:", response.statusText);
             }
         } catch (error) {

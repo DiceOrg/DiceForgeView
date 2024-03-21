@@ -9,9 +9,7 @@ export default function Header() {
     const location = useLocation();
 
     function signOut() {
-        console.log("cookie");
         console.log(Cookies.get('jwt'));
-        Cookies.remove('jwt');
         setUser();
     }
 
