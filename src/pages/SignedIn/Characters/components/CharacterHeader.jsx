@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 
 function CharacterHeader({character, setCharacter}) {
   const [speed, setSpeed] = useState(character.speed.value);
+  const [hitPoints, setHitPoints] = useState(30)
 
   async function updateSpeed() {
     try {
@@ -41,6 +42,7 @@ function CharacterHeader({character, setCharacter}) {
     }
   };
 
+
   useEffect(() => {
     async function updateSpeedEffect() {
       try {
@@ -56,26 +58,40 @@ function CharacterHeader({character, setCharacter}) {
     }
   }, [speed]);
 
+  function Increase() {
+    const newHitPoints = hitPoints + 1;
+    setHitPoints(newHitPoints);
+  }
+
+  function Decrease() {
+    if (hitPoints > 0) {
+      const newHitPoints = hitPoints - 1;
+      setHitPoints(newHitPoints);
+    }
+  }
+
+
+
   return (
     <>
       <div className="character-header">
         <div className="hit-points">
           <div className="hp">
-            <button>+</button>
-            <button>-</button>
-            <h2>50</h2>
+            <button onClick={Increase}>+</button>
+            <button onClick={Decrease}>-</button>
+            <h2>{hitPoints}</h2>
             <p>HP</p>
           </div>
           <div>
-            <p>36</p>
+            <input type="text" />
             <p>Current</p>
           </div>
           <div>
-            <p>50</p>
+            <input type="text" />
             <p>Max</p>
           </div>
           <div>
-            <p>0</p>
+          <input type="text" />
             <p>temp</p>
           </div>
         </div>
