@@ -4,7 +4,6 @@ import { DataContext } from "../../../../App";
 import SkillList from "./CharacterView components/SkillList";
 import CharacterHeader from "./CharacterView components/CharacterHeader";
 import AbilityScoresList from "./CharacterView components/AbilityScoresList";
-import { SkillList } from "./CharacterView components/SkillList";
 import { Style } from "./CharacterView components/Style";
 import Spells from "../../Spells";
 import Equipment from "../Equipment/Equipment";
