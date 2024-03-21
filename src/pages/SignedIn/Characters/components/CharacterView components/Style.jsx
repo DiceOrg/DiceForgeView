@@ -7,26 +7,6 @@ export function Style({character, setCharacter}) {
     const [style, setStyle] = useState(character.style);
     const [alteration, setAlteration] = useState(false);
 
-    async function updateCharacter(value) {
-        try {
-          const jwtToken = Cookies.get('jwt');
-    
-          await fetch(`https://localhost:7256/character/${character.id}`, {
-            method: 'PUT',
-            headers: {
-              'accept': "*/*",
-              'Authorization': `Bearer ${jwtToken}`,
-              'Content-Type': 'application/json'
-            }, 
-            body: JSON.stringify({name: value})
-        }
-        ).then(res => res.json());
-
-        } catch (error) {
-          console.error('Error fetching data:', error.message);
-        }
-    }
-
     async function updateStyle() {
         try {
           const jwtToken = Cookies.get('jwt');
@@ -46,12 +26,6 @@ export function Style({character, setCharacter}) {
         } catch (error) {
           console.error('Error fetching data:', error.message);
         }
-    }
-
-    const changeName = (event) => {
-        const { name, value } = event.target;
-        setCharacter({...character, [name]: value})
-        updateCharacter(value);
     }
 
     useEffect(() => {
