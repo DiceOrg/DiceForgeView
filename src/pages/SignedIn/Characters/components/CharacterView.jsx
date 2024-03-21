@@ -61,8 +61,8 @@ export default function CharacterView() {
           <div className="box">
             <header className="box-header">
               <h5 className="title">Equipment</h5>
-              <Equipment />
             </header>
+            <Equipment/>
             <div className="content"></div>
           </div>
           <div className="box">
@@ -82,8 +82,8 @@ export default function CharacterView() {
           <div className="box">
             <header className="box-header">
               <h5 className="title">Spells</h5>
-              <Spells />
             </header>
+            <Spells/>
             <div className="content"></div>
           </div>
           <div className="box">

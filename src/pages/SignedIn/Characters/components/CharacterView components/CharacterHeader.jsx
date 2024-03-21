@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 function CharacterHeader({ character, setCharacter }) {
   const [speed, setSpeed] = useState(character.speed.value);
   const [hitPoints, setHitPoints] = useState(30)
-
+  //console.log(character.HitPoints.current)
   async function updateSpeed() {
     try {
       const jwtToken = Cookies.get('jwt');
