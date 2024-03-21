@@ -7,7 +7,7 @@ import Header from "./components/Header";
 import "./App.css";
 import CharacterView from "./pages/SignedIn/Characters/components/CharacterView";
 import Cookies from "js-cookie";
-import CharacterList from "./pages/SignedIn/Characters/components/CharacterList";
+import Characters from "./pages/SignedIn/Characters";
 
 const LoginContext = createContext();
 const DataContext = createContext();
@@ -114,8 +114,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/signin" element={<SignIn />} />
-            <Route path="/characters" element={<CharacterList />} />
-            <Route path="/main" element={<CharacterView />} />
+            <Route path="/characters" element={<Characters />} />
+            <Route path="/characters/:id" element={<CharacterView />} />
           </Routes>
         </LoginContext.Provider>
       </DataContext.Provider>

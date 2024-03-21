@@ -2,7 +2,6 @@
 
 #root, body {
   margin: 0;
-  overflow: hidden;
   background-color: #0c0b04;
   color: white;
   font-family: 'Lexend Deca', sans-serif;
@@ -12,14 +11,18 @@
 
   display: flex;
   height: calc(100vh - 50px);
-  width: 100%;
   justify-content: center;
   align-items: center;
 }
 
 body {
+  overflow-y: auto;
   position: relative;
   top: 50px;
+}
+
+.active {
+  color: white !important;
 }
 
 .text-center {
@@ -30,8 +33,21 @@ body {
   flex-wrap: nowrap !important;
 }
 
+.truncate-text {
+  white-space: nowrap;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  width: 100%;
+}
+
+.full-height {
+  height: 100vh;
+  top: 0;
+  overflow: hidden !important;
+}
+
 .header {
-  background-color: #000046;
+  background-color: #4e4e4e;
   padding: 10px 25px;
   display: flex;
   align-items: center;
@@ -54,6 +70,27 @@ body {
   left: 0;
 }
 
+.navbar {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.nav-item-container {
+  margin-left: 20px;
+  height: 100%;
+  width: auto;
+  position: relative; 
+}
+
+.nav-item-content {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .sign-in-container {
   display: flex;
   box-sizing: border-box;
@@ -69,6 +106,12 @@ body {
   position: relative;
   width: 100%;
   height: auto;
+}
+
+@media screen and (max-width: 1400px) {
+  .sign-in-container img {
+    width: 85%;
+  }
 }
 
 @media screen and (max-width: 1280px) {
@@ -229,6 +272,90 @@ body {
   padding: 1%;
 }
 
+.ability-scores {
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  text-shadow: 0px 0px 0.7px rgba(255, 255, 255, 0.5);
+}
+
+.score-column {
+  text-align: center;
+}
+
+.score-row {
+  margin: 5px 0;
+}
+
+.score-row:last-child {
+  padding-bottom: 10px;
+}
+
+.column input[type="text"]{
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  text-shadow: 0px 0px 0.7px rgba(255, 255, 255, 0.5);
+
+  width: 100%;
+  color: white;
+  background-color: transparent;
+  border-radius: 0 !important;
+  border: 0 solid black;
+  border-bottom: 1px solid white;
+  text-align: center;
+  padding: 0;
+}
+
+.column input[type="text"]:focus{
+  outline: none;
+}
+
+.column .value {
+  font-weight: 500;
+  font-size: 18px;
+  border: 0 solid black;
+  border-bottom: 1px solid white;
+}
+
+.score-name {
+  font-weight: 800 !important;
+}
+
+.skill-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.skill-title-row {
+  font-weight: bold;
+  width: 30%;
+  text-align: center;
+}
+
+.skill-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.skill-left {
+  box-sizing: border-box;
+  width: 70% !important;
+  text-align: left;
+}
+
+.skill-right {
+  box-sizing: border-box;
+  width: 30% !important;
+  text-align: right;
+}
+
+.skill-right input {
+  text-align: center;
+}
+
 .column {
   box-sizing: border-box;
   width: 100%;
@@ -303,14 +430,50 @@ body {
   margin: 0;
 }
 
+.characters-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-self: flex-start;
+}
+
+.characters-container h1 {
+  padding-bottom: 10px;
+  border-bottom: 1px solid white;
+}
+
 .characters-row {
+  display: flex;
+  flex-wrap: wrap;
   width: 100%;
-  column-gap: 1.25rem;
+  max-width: 75vw;
+}
+
+.character-column {
+  padding: 0 !important;
+  margin: 10px;
+  box-sizing: border-box;
+  flex: 1 0 calc(100% - 20px); /* full width on mobile */
+}
+
+@media (min-width: 1024px) { /* Adjust the breakpoint as needed */
+  .character-column {
+    flex: 1 0 calc(50% - 20px); /* 4 columns on desktop */
+  }
+}
+
+.character-column:nth-child(2n) {
+  margin-right: auto; /* This will push the subsequent element to the next row */
 }
 
 .character-card {
-  background-color: gray;
+  background-color: #808080;
   padding: 1.25rem;
+}
+
+.character-card:hover {
+  background-color: #9a9a9a;
+  cursor: pointer;
 }
 
 .character-header {

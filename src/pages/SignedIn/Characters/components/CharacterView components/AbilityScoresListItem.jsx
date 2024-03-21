@@ -10,43 +10,43 @@ export default function AbilityScoresListItem({ ability_name, ability_ref, setCh
 
     async function updateAbility() {
         try {
-          const jwtToken = Cookies.get('jwt');
-    
-          await fetch(`https://localhost:7256/character/Ability/${ability.id}`, {
-            method: 'PUT',
-            headers: {
-              'accept': "*/*",
-              'Authorization': `Bearer ${jwtToken}`,
-              'Content-Type': 'application/json'
-            }, 
-            body: JSON.stringify(ability)
-        }
-        ).then(res => res.json());
+            const jwtToken = Cookies.get('jwt');
+
+            await fetch(`https://localhost:7256/character/Ability/${ability.id}`, {
+                method: 'PUT',
+                headers: {
+                    'accept': "*/*",
+                    'Authorization': `Bearer ${jwtToken}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(ability)
+            }
+            ).then(res => res.json());
 
         } catch (error) {
-          console.error('Error fetching data:', error.message);
+            console.error('Error fetching data:', error.message);
         }
     }
 
     useEffect(() => {
         // do not update with empty string, and if alteration has been made
-        if ( alteration && ability.value.length != 0 ){
+        if (alteration && ability.value.length != 0) {
             updateAbility();
             setAlteration(false);
         }
     }, [alteration])
 
     const change = (event) => {
-    const { name, value } = event.target;
+        const { name, value } = event.target;
         let objectToChange = { ...character };
-        if (name == "prof"){
+        if (name == "prof") {
             let valueToChange = objectToChange.abilities[ability_name].prof;
             objectToChange.abilities[ability_name].prof = !valueToChange;
-        }else if (name == "value" && !isNaN(value)){
+        } else if (name == "value" && !isNaN(value)) {
             objectToChange.abilities[ability_name].value = Number(value);
-            if ( value > 30){
+            if (value > 30) {
                 objectToChange.abilities[ability_name].value = 30;
-            }else if (value < 0){
+            } else if (value < 0) {
                 objectToChange.abilities[ability_name].value = 0;
             }
         }
@@ -58,29 +58,29 @@ export default function AbilityScoresListItem({ ability_name, ability_ref, setCh
     }
 
     return (
-        <div className="row no-wrap">
-            <div className="column">
-                <input name="value" value={ability.value} onChange={(event) => change(event)} />
+        <div className="row score-row no-wrap">
+            <div className="column score-column">
+                <input type="text" name="value" value={ability.value} onChange={(event) => change(event)} />
                 <div>Score</div>
             </div>
             <div className="column text-center size-3">
-                <div>{ability_name.slice(0, 1).toUpperCase() + ability_name.slice(1, 3)}</div>
+                <div className="value score-name">{ability_name.slice(0, 1).toUpperCase() + ability_name.slice(1, 3)}</div>
                 <div>{ability_name.slice(0, 1).toUpperCase() + ability_name.slice(1)}</div>
             </div>
             <div className="column text-center">
-                <div>{Math.floor((ability.value - 10) / 2)}</div>
+                <div className="value">{Math.floor((ability.value - 10) / 2)}</div>
                 <div>Mod</div>
             </div>
             <div className="column text-center">
-                <input type="checkbox" name="prof" checked={ability.prof} onChange={(event) => change(event)} />
+                <div className="value"><input type="checkbox" name="prof" checked={ability.prof} onChange={(event) => change(event)} /></div>
                 <div>Prof</div>
             </div>
             <div className="column text-center">
-                <div>0</div>
+                <div className="value">0</div>
                 <div>Misc</div>
             </div>
             <div className="column text-center">
-                <div>{Math.floor((ability.value - 10) / 2 + prof_value * ability.prof)}</div>
+                <div className="value">{Math.floor((ability.value - 10) / 2 + prof_value * ability.prof)}</div>
                 <div>Save</div>
             </div>
         </div>

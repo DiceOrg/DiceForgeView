@@ -1,21 +1,23 @@
 import { useState, useEffect, useContext } from "react";
+import { useParams } from 'react-router-dom';
 import { DataContext } from "../../../../App";
-import CharacterHeader from "./CharacterHeader";
+import SkillList from "./CharacterView components/SkillList";
+import CharacterHeader from "./CharacterView components/CharacterHeader";
 import AbilityScoresList from "./CharacterView components/AbilityScoresList";
-import { SkillList } from "./CharacterView components/SkillList";
 import Spells from "../../Spells";
 import Equipment from "../Equipment/Equipment";
 
 export default function CharacterView() {
-    const { fetchCharacter } = useContext(DataContext)
-    const [character, setCharacter] = useState();
-    
-    useEffect(() => {
-        fetchCharacter(1, setCharacter);
-      }, [])
+  const { id } = useParams();
+  const { fetchCharacter } = useContext(DataContext)
+  const [character, setCharacter] = useState();
 
-    if (character == null)
-        return <>loading...</>
+  useEffect(() => {
+    fetchCharacter(id, setCharacter);
+  }, [])
+
+  if (character == null)
+    return <>loading...</>
 
   return (
     <div className="container">
@@ -27,7 +29,7 @@ export default function CharacterView() {
           </div>
         </div>
         <div className="column">
-            <CharacterHeader character={character} setCharacter={setCharacter}/>
+          <CharacterHeader />
         </div>
       </div>
       <div className="row">
@@ -42,8 +44,8 @@ export default function CharacterView() {
             <header className="box-header">
               <h5 className="title">Ability Scores</h5>
             </header>
-            <div className="content">
-                <AbilityScoresList abilities={character.abilities} character={character} setCharacter={setCharacter}/>
+            <div className="content ability-scores">
+              <AbilityScoresList abilities={character.abilities} character={character} setCharacter={setCharacter} />
             </div>
           </div>
           <div className="box">
@@ -95,11 +97,19 @@ export default function CharacterView() {
         </div>
         <div className="column size-3">
           <div className="box">
-            <header className="box-header">
+            <header className="box-header skill-header">
               <h5 className="title">Skills</h5>
+              <div className="row skill-title-row">
+                <div className="column">
+                  Prof
+                </div>
+                <div className="column">
+                  Exp
+                </div>
+              </div>
             </header>
             <div className="content">
-                <SkillList character={character} setCharacter={setCharacter}/>
+              <SkillList character={character} setCharacter={setCharacter} />
             </div>
           </div>
           <div className="box">
