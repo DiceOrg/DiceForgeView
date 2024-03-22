@@ -1,8 +1,8 @@
 export default function Home() {
 
     return (
-        <p>
-            Home Work
-        </p>
+        <h1>
+            Welcome to DiceForge
+        </h1>
     );
   }
