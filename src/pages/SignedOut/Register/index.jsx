@@ -1,10 +1,12 @@
 import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { LoginContext } from "../../../App";
+import { useNavigate } from "react-router";
 
 
 export default function Register() {
     const { registerData, setRegisterData, checkInput } = useContext(LoginContext);
+    const navigate = useNavigate();
 
     const handleRegister = async () => {
         try {
@@ -19,6 +21,7 @@ export default function Register() {
                 // Handle successful registration
                 console.log(response)
                 console.log("Registration successful");
+                navigate(`/signin`);
             } else {
                 // Handle error response
                 console.log(response)

@@ -38,8 +38,6 @@ export default function Style({ character, setCharacter }) {
 
     const changeStyle = (event) => {
         const { name, value } = event.target;
-        if (value.length == 0)
-            return;
         if (name == "age" && isNaN(value)) {
             return;
         }

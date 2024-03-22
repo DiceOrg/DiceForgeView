@@ -539,11 +539,6 @@ body {
   }
 }
 
-.character-column:nth-child(2n) {
-  margin-right: auto;
-  /* This will push the subsequent element to the next row */
-}
-
 .character-card {
   background-color: #808080;
   padding: 1.25rem;
