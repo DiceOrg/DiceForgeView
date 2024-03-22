@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { StyleContext } from "../../../../../App";
 import Cookies from "js-cookie";
 
 export default function Skill({ skill_name, skill_ref, abilities, character, setCharacter }) {
+
+    const { color } = useContext(StyleContext)
 
     const [skill, setSkill] = useState(skill_ref);
     const [alteration, setAlteration] = useState(false);
@@ -62,7 +65,8 @@ export default function Skill({ skill_name, skill_ref, abilities, character, set
             <div className="column skill-left">
                 <div className="row skill-row">
                     <div className="column skill-bonus">{Math.floor((skill_value - 10) / 2 + prof_value * skill.prof + exp_value * skill.exp)}</div>
-                    <div className="column skill-title">{transformTitle(skill_name)} ({skill.attribute.slice(0, 3)}) </div>
+                    <div className="column skill-title">{transformTitle(skill_name)}  <div className={`column no-padding ${color === "color" ? skill.attribute.toLowerCase() : null}`}>({skill.attribute.slice(0, 3)})</div></div>
+                    
                 </div>
             </div>
 

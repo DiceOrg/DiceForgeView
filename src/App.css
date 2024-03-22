@@ -32,6 +32,10 @@ body {
   transform: translateY(-50%);
 }
 
+.no-padding {
+  padding: 0;
+}
+
 .no-margin {
   margin: 0;
 }
@@ -92,8 +96,10 @@ body {
   flex-direction: row;
 }
 
-.navbar > :last-child {
+
+.nav-right-side {
   margin-left: auto;
+  display: flex;
 }
 
 .nav-item-container {
@@ -594,4 +600,28 @@ body {
 
 .Character-header-right>div {
   margin-left: 10px;
+}
+
+.strength {
+  color: lightcoral;
+}
+
+.dexterity {
+  color: lightsalmon;
+}
+
+.constitution {
+  color: lightgreen;
+}
+
+.intelligence {
+  color: lightskyblue;
+}
+
+.wisdom {
+  color: lavender;
+}
+
+.charisma {
+  color: pink;
 }

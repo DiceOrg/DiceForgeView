@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { StyleContext } from "../../../../../App";
 import Cookies from "js-cookie";
 
 export default function AbilityScoresListItem({ ability_name, ability_ref, setCharacter, character }) {
+
+    const { color } = useContext(StyleContext)
 
     let prof_value = 2;
 
@@ -64,8 +67,8 @@ export default function AbilityScoresListItem({ ability_name, ability_ref, setCh
                 <div>Score</div>
             </div>
             <div className="column text-center size-3">
-                <div className="value score-name">{ability_name.slice(0, 1).toUpperCase() + ability_name.slice(1, 3)}</div>
-                <div>{ability_name.slice(0, 1).toUpperCase() + ability_name.slice(1)}</div>
+                <div className={`value score-name ${color === "color" ? ability_name : null}`}>{ability_name.slice(0, 1).toUpperCase() + ability_name.slice(1, 3)}</div>
+                <div className>{ability_name.slice(0, 1).toUpperCase() + ability_name.slice(1)}</div>
             </div>
             <div className="column text-center">
                 <div className="value">{Math.floor((ability.value - 10) / 2)}</div>

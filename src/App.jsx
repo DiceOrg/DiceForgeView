@@ -10,7 +10,7 @@ import CharacterView from "./pages/SignedIn/Characters/components/CharacterView"
 import Cookies from "js-cookie";
 import Characters from "./pages/SignedIn/Characters";
 
-
+const StyleContext = createContext();
 const LoginContext = createContext();
 const DataContext = createContext();
 
@@ -26,6 +26,11 @@ function App() {
     password: "",
     //role: "User"
   });
+  const [color, setColor] = useState(() => {
+    const initialTheme = localStorage.getItem("color");
+    console.log("first set");
+    return initialTheme ? initialTheme : "monochrome";
+});
 
   function checkInput(inputField) {
     var input = document.getElementById(inputField);
@@ -96,7 +101,7 @@ function App() {
     const jwtToken = Cookies.get('jwt');
     let signedIn = false;
     console.log(jwtToken)
-    if(jwtToken){
+    if (jwtToken) {
       const isExpired = isCookieExpired('jwt');
       if (isExpired) {
         setUser();
@@ -108,11 +113,11 @@ function App() {
     }
     if (!signedIn && location.pathname !== "/register") {
       navigate("/signin", { replace: true });
-    } else if(signedIn && location.pathname === "/signin" || signedIn && location.pathname === "/register"){
+    } else if (signedIn && location.pathname === "/signin" || signedIn && location.pathname === "/register") {
       navigate("/", { replace: true });
     }
 
-   }, [user, navigate]);
+  }, [user, navigate]);
 
   useEffect(() => {
     console.log(registerData)
@@ -124,21 +129,23 @@ function App() {
 
   return (
     <>
-      <DataContext.Provider value={{ fetchCharacter: fetchCharacter, fetchAllCharacters: fetchAllCharacters }}>
-        <LoginContext.Provider value={{ loginData, setLoginData, registerData, setRegisterData, checkInput, setUser }}>
-          {user ? <Header /> : null}
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/new" element={<CharacterCreate />} />
-            <Route path="/characters" element={<Characters />} />
-            <Route path="/characters/:id" element={<CharacterView />} />
-          </Routes>
-        </LoginContext.Provider>
-      </DataContext.Provider>
+      <StyleContext.Provider value={{ color: color, setColor: setColor }}>
+        <DataContext.Provider value={{ fetchCharacter: fetchCharacter, fetchAllCharacters: fetchAllCharacters }}>
+          <LoginContext.Provider value={{ loginData, setLoginData, registerData, setRegisterData, checkInput, setUser }}>
+            {user ? <Header /> : null}
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/signin" element={<SignIn />} />
+              <Route path="/new" element={<CharacterCreate />} />
+              <Route path="/characters" element={<Characters />} />
+              <Route path="/characters/:id" element={<CharacterView />} />
+            </Routes>
+          </LoginContext.Provider>
+        </DataContext.Provider>
+      </StyleContext.Provider>
     </>
   );
 }
 
-export { App, LoginContext, DataContext };
+export { App, LoginContext, DataContext, StyleContext };
