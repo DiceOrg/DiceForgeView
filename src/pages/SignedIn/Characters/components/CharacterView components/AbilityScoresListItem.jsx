@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { StyleContext } from "../../../../../App";
 import Cookies from "js-cookie";
 
-export default function AbilityScoresListItem({ ability_name, ability_ref, setCharacter, character }) {
+export default function AbilityScoresListItem({ ability_ref, index, setCharacter, character }) {
 
     const { color } = useContext(StyleContext)
 
@@ -40,23 +40,24 @@ export default function AbilityScoresListItem({ ability_name, ability_ref, setCh
     }, [alteration]);
 
     const changeAbility = (event) => {
+        console.log(index);
         const { name, value } = event.target;
         let objectToChange = { ...character };
         if (name == "prof") {
-            let valueToChange = objectToChange.abilities[ability_name].prof;
-            objectToChange.abilities[ability_name].prof = !valueToChange;
+            let valueToChange = objectToChange.abilities[index].prof;
+            objectToChange.abilities[index].prof = !valueToChange;
         } else if (name == "value" && !isNaN(value)) {
-            objectToChange.abilities[ability_name].value = Number(value);
+            objectToChange.abilities[index].value = Number(value);
             if (value > 30) {
-                objectToChange.abilities[ability_name].value = 30;
+                objectToChange.abilities[index].value = 30;
             } else if (value < 0) {
-                objectToChange.abilities[ability_name].value = 0;
+                objectToChange.abilities[index].value = 0;
             }
         }
         else
             return;
         setCharacter(objectToChange);
-        setAbility(objectToChange.abilities[ability_name]);
+        setAbility(objectToChange.abilities[index]);
         setAlteration(true);
     }
 
@@ -67,8 +68,8 @@ export default function AbilityScoresListItem({ ability_name, ability_ref, setCh
                 <div>Score</div>
             </div>
             <div className="column text-center size-3">
-                <div className={`value score-name ${color === "color" ? ability_name : null}`}>{ability_name.slice(0, 1).toUpperCase() + ability_name.slice(1, 3)}</div>
-                <div className>{ability_name.slice(0, 1).toUpperCase() + ability_name.slice(1)}</div>
+                <div className={`value score-name ${color === "color" ? ability.name : null}`}>{ability.name.slice(0, 1).toUpperCase() + ability.name.slice(1, 3)}</div>
+                <div className>{ability.name.slice(0, 1).toUpperCase() + ability.name.slice(1)}</div>
             </div>
             <div className="column text-center">
                 <div className="value">{Math.floor((ability.value - 10) / 2)}</div>

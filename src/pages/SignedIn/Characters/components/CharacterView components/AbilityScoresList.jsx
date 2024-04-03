@@ -4,16 +4,18 @@ export default function AbilityScoresList({ abilities, character, setCharacter }
 
     return (
         <>
-            {Object.keys(abilities).map((ability_name, key) => 
-            <>
-                {ability_name != "id" ? <AbilityScoresListItem 
-                ability_name={ability_name} 
-                ability_ref={abilities[ability_name]} 
-                key={key} 
-                setCharacter={setCharacter} 
-                character={character} /> : 
-                <></>}
-            </>)}
+            {
+                abilities.map((ability, key) => 
+                <>
+                    <AbilityScoresListItem 
+                    index = {key}
+                    ability_ref={ability} 
+                    setCharacter={setCharacter} 
+                    character={character}
+                    key = {key}
+                    />
+                </>)
+            }
         </>
     );
 }

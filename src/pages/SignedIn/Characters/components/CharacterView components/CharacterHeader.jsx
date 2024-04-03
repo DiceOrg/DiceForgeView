@@ -2,8 +2,8 @@ import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 
 function CharacterHeader({ character, setCharacter }) {
-  const [speed, setSpeed] = useState(character.speed.value);
-  const [hitPoints, setHitPoints] = useState(character.hitPoints);
+  const [speed, setSpeed] = useState(character.speed);
+  const [health, setHitPoints] = useState(character.health);
   const [alteration, setAlteration] = useState(false);
 
   async function updateSpeed() {
@@ -11,7 +11,7 @@ function CharacterHeader({ character, setCharacter }) {
       const jwtToken = Cookies.get("jwt");
 
       const response = await fetch(
-        `https://localhost:7256/character/Speed/${character.speed.id}`,
+        `https://localhost:7256/character/Speed/${character.id}`,
         {
           method: "PUT",
           headers: {
@@ -54,7 +54,7 @@ function CharacterHeader({ character, setCharacter }) {
       }
     }
 
-    if (speed !== character.speed.value) {
+    if (speed !== character.speed) {
       updateSpeedEffect();
     }
   }, [speed]);
@@ -63,17 +63,17 @@ function CharacterHeader({ character, setCharacter }) {
   async function updateHealth() {
     try {
       const jwtToken = Cookies.get("jwt");
-      console.log("hitpoints", hitPoints)
+      console.log("hitpoints", health)
 
       const response = await fetch(
-        `https://localhost:7256/character/HitPoints/${character.hitPoints.id}`,
+        `https://localhost:7256/character/HitPoints/${character.health.id}`,
         {
           method: "PUT",
           headers: {
             Authorization: `Bearer ${jwtToken}`,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(hitPoints),
+          body: JSON.stringify(health),
         }
       );
 
@@ -106,14 +106,14 @@ function CharacterHeader({ character, setCharacter }) {
   const changeHitPoint = (event) => {
     const { name, value } = event.target;
     let objectToChange = { ...character };
-    console.log("hitpoints", objectToChange.hitPoints);
+    console.log("hitpoints", objectToChange.health);
     if ( !isNaN(value)) {
-      objectToChange.hitPoints[name] = Number(value);
+      objectToChange.health[name] = Number(value);
     }
     else
         return;
     setCharacter(objectToChange);
-    setHitPoints(objectToChange.hitPoints);
+    setHitPoints(objectToChange.health);
     setAlteration(true);
 }
 
@@ -123,14 +123,14 @@ function CharacterHeader({ character, setCharacter }) {
         <div className="column">
           <div className="row">
             <div className="column text-center size-3">
-              <h1 className="center no-margin text-center">{character.hitPoints.current + character.hitPoints.temp}</h1>
+              <h1 className="center no-margin text-center">{character.health.current + character.health.temp}</h1>
             </div>
             <div className="row size-4">
               <div className="column text-center">
                 <input
                   type="text"
                   name="current"
-                  value={character.hitPoints.current}
+                  value={character.health.current}
                   onChange={(event) => changeHitPoint(event)}
                 ></input>
                 <div>Current</div>
@@ -139,7 +139,7 @@ function CharacterHeader({ character, setCharacter }) {
                 <input
                   type="text"
                   name="max"
-                  value={character.hitPoints.max}
+                  value={character.health.max}
                   onChange={(event) => changeHitPoint(event)}
                 ></input>
                 <div>Max</div>
@@ -148,7 +148,7 @@ function CharacterHeader({ character, setCharacter }) {
                 <input
                   type="text"
                   name="temp"
-                  value={character.hitPoints.temp}
+                  value={character.health.temp}
                   onChange={(event) => changeHitPoint(event)}
                 ></input>
                 <div>Temp</div>

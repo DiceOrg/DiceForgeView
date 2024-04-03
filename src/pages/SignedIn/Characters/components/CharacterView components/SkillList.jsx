@@ -3,18 +3,30 @@ import Skill from "./Skill.jsx"
 
 export default function SkillList({setCharacter, character}) {
 
+    console.log("skills:", character.skills.sort((a, b) =>{
+      if ( a.name < b.name)
+       return -1;
+      else 
+       return 1;
+      }));
+
     return (
         <>
-        {Object.keys(character.skills).map((skill, key) => 
+        {character.skills.sort((a, b) =>{
+          if ( a.name < b.name)
+          return -1;
+          else 
+          return 1;
+          }).map((skill, key) => 
         <>
-            {skill != "id" ? <Skill
-              skill_ref={character.skills[skill]}
-              skill_name={skill}
+            <Skill
+              skill_ref={skill}
+              skill_name={skill.name}
               key={key}
               abilities={character.abilities}
               setCharacter={setCharacter}
               character={character}
-            /> : <></>}
+            />
             </>
           )}
         </>

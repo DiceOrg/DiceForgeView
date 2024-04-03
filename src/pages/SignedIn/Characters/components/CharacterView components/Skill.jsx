@@ -40,13 +40,13 @@ export default function Skill({ skill_name, skill_ref, abilities, character, set
     let prof_value = 2;
     let exp_value = 2;
 
-    let skill_value = abilities[skill.attribute.toLowerCase()].value;
+    let skill_value = abilities.find(elm => elm.name == skill.attribute).value;
 
     // inverts checkbox
     const changeSkill = (event) => {
         const { name } = event.target;
         let objectToChange = { ...character };
-        objectToChange.skills[skill_name][name] = !skill[name];
+        objectToChange.skills.find(elm => elm.name == skill_name)[name] != skill[name];
         setCharacter(objectToChange);
         setSkill({ ...skill, [name]: !skill[name] })
         setAlteration(true);
@@ -65,7 +65,11 @@ export default function Skill({ skill_name, skill_ref, abilities, character, set
             <div className="column skill-left">
                 <div className="row skill-row">
                     <div className="column skill-bonus">{Math.floor((skill_value - 10) / 2 + prof_value * skill.prof + exp_value * skill.exp)}</div>
-                    <div className="column skill-title">{transformTitle(skill_name)}  <div className={`column no-padding ${color === "color" ? skill.attribute.toLowerCase() : null}`}>({skill.attribute.slice(0, 3)})</div></div>
+                    <div className="column skill-title">{transformTitle(skill_name)}  
+                        <div className={`column no-padding ${color === "color" ? skill.attribute.toLowerCase() : null}`}>
+                            ({skill.attribute.slice(0, 3)})
+                        </div>
+                    </div>
                     
                 </div>
             </div>
