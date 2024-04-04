@@ -102,7 +102,7 @@ export default function Style({ character, setCharacter }) {
                     <div>Background</div>
                 </div>
                 <div className="column text-center">
-                    <input type="text" name="level" value="20"></input>
+                    <input type="text" name="level" value="20" readOnly={true}></input>
                     <div>Level</div>
                 </div>
             </div>

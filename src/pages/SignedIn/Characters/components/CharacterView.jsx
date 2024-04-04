@@ -83,7 +83,7 @@ export default function CharacterView() {
             <header className="box-header">
               <h5 className="title">Spells</h5>
             </header>
-            <Spells/>
+            <Spells character={character}/>
             <div className="content"></div>
           </div>
           <div className="box">
