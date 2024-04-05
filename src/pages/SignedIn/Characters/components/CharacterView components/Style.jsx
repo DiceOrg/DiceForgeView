@@ -56,7 +56,7 @@ export default function Style({ character, setCharacter }) {
             <h2 className='no-margin'>Style</h2>
             <div className="row style-labelline">
                 <div className="column text-center">
-                    <input type="text" name="age" value={style.age} onChange={(event) => changeStyle(event)}></input>
+                    <input type="text" name="age" value={style.age == null ? "" : style.age} onChange={(event) => changeStyle(event)}></input>
                     <div>Age</div>
                 </div>
                 <div className="column text-center">

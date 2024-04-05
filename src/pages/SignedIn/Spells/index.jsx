@@ -2,18 +2,30 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 
 export default function Spells({character}) {
-    const [spells, setSpells] = useState(character.spells);
+    const [spellsRef, setSpellsRef] = useState(character.spells);
+    const [spells, setSpells] = useState([]);
     const [totalSpells, setTotalSpells] = useState([]);
-
-    // function for shuffeling array
-    const shuffleArray = (array) => {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-    };
     
+    const getSpellDetails = () => {
+      console.log("ref", spellsRef);
+      const getDetails = async (element, spellArray) => {
+        const result = await fetch(`https://www.dnd5eapi.co/api/spells/${element.index}`)
+        const res = await result.json();
+        await spellArray.push(res);
+      }
+
+      let spellArray = [];
+
+      spellsRef.forEach(element => {
+        try{
+          getDetails(element, spellArray);
+        } catch (error){
+          console.error("Login failed:", error.message);
+        }
+      });
+      setSpells(spellArray);
+    }
+
     const getSpells = async () => {
         try {
           const response = await fetch("https://www.dnd5eapi.co/api/spells")
@@ -40,7 +52,7 @@ export default function Spells({character}) {
       console.log("add", spell);
       try {
         const jwtToken = Cookies.get('jwt');
-        const response = await fetch(
+        await fetch(
           `https://localhost:7256/character/${character.id}/Spells`, {
           method: 'POST', 
                 headers: {
@@ -49,7 +61,7 @@ export default function Spells({character}) {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(spell)
-        }).then(res => res.json()).then(res => setSpells([...spells, res]));
+        }).then(res => res.json()).then(res => setSpellsRef([...spellsRef, res]));
 
       } catch (error){
         console.error('Error fetching data:', error.message);
@@ -61,8 +73,10 @@ export default function Spells({character}) {
     }, [])
 
     useEffect(() => {
-        console.log("STATE:", spells)
-    }, [spells])
+        console.log("STATE:", spellsRef)
+        getSpellDetails()
+
+    }, [spellsRef])
 
     const [searchSpells, setSearchSpells] = useState([]);
     const [focus, setFocus] = useState(false);
@@ -87,7 +101,8 @@ export default function Spells({character}) {
             placeholder="Search for spells.."
             onFocus={() => setFocus(true)} onBlur={() => setFocus(false)}/>
             <ul className="spellSearch">
-            {/* This might be an illegal way of doing this, but it works for the time being*/
+            {/* This might be an illegal way of doing this, 
+            but it works for the time being*/
             (focus || searchSpells.length < 10) && 
               searchSpells.map((spell, key) => 
               <li key={key} 
@@ -99,7 +114,7 @@ export default function Spells({character}) {
             <ul>
               {spells.map(spell => (
                 <li key={spell.index} >
-                  {spell.name}
+                  {spell.name} {spell.concentation ? "(C)" : ""}
                 </li>
               ))}
             </ul>
