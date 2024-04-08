@@ -42,7 +42,6 @@ export default function Skill({ skill_name, skill_ref, abilities, character, set
 
     let skill_value = abilities.find(elm => elm.name == skill.attribute).value;
 
-    // inverts checkbox
     const changeSkill = (event) => {
         const { name } = event.target;
         let objectToChange = { ...character };
@@ -53,7 +52,6 @@ export default function Skill({ skill_name, skill_ref, abilities, character, set
     }
 
     useEffect(() => {
-        // do not update if alteration has not been made
         if (alteration) {
             updateSkill();
             setAlteration(false);

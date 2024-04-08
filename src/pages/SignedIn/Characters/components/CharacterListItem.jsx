@@ -16,7 +16,7 @@ export default function CharacterListItem({ character }) {
         <div className="column character-column" onClick={handleClick}>
             <div className="character-card">
               <h2 className="truncate-text">{name}</h2>
-              <h4 className="truncate-text">{race ? race : "Undefined Race"} {class_ ? class_ : "Undefined Class"}</h4>
+              <h4 className="truncate-text">{race ? race : "Raceless"} {class_ ? class_ : "Classless"}</h4>
             </div>
         </div>
     );

@@ -68,8 +68,8 @@ export default function AbilityScoresListItem({ ability_ref, index, setCharacter
                 <div>Score</div>
             </div>
             <div className="column text-center size-3">
-                <div className={`value score-name ${color === "color" ? ability.name : ""}`}>{ability.name.slice(0, 1).toUpperCase() + ability.name.slice(1, 3)}</div>
-                <div className='value'>{ability.name.slice(0, 1).toUpperCase() + ability.name.slice(1)}</div>
+                <div className={`value score-name ${color === "color" ? ability.name.toLowerCase() : ""}`}>{ability.name.slice(0, 1).toUpperCase() + ability.name.slice(1, 3)}</div>
+                <div>{ability.name.slice(0, 1).toUpperCase() + ability.name.slice(1)}</div>
             </div>
             <div className="column text-center">
                 <div className="value">{Math.floor((ability.value - 10) / 2)}</div>
