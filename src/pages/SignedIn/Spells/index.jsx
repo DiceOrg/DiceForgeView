@@ -19,7 +19,7 @@ export default function Spells({character}) {
 
       const data = await Promise.all(responses.map(response => response.json()));
 
-      setSpells(data);
+      setSpells(data.sort(elm => elm.name));
     }
 
     useEffect(() => {
@@ -67,7 +67,7 @@ export default function Spells({character}) {
         const spellDetails = getDetails(data);
 
         setSpellsRef([...spellsRef, data]);
-        setSpells([...spells, spellDetails]);
+        setSpells([...spells, spellDetails].sort(elm => elm.name));
 
 
       } catch (error){
@@ -90,6 +90,12 @@ export default function Spells({character}) {
 
     console.log("spells", spells);
 
+    const spellLevels = [...new Set(spells.map(spell => spell.level))].sort()
+    console.log("levels", spellLevels)
+
+    if(spellLevels.length == 0)
+      return <>Loading...</>
+
     return (
         <>
         <div className="spell-box">
@@ -110,8 +116,13 @@ export default function Spells({character}) {
             )}
             </ul>
             <ul>
-              {spells.map((spell, key) => (
-                <Spell key={key} spell={spell}/>
+              {spellLevels.map((level, key) => (
+                <div key={key}>
+                  <h1 className="spell title" key={key}>{level == 0 ? "Cantrips" : level + ". level spells"}</h1>
+                  {spells.filter(spell => spell.level == level).map((spell, alt_key) => (
+                    <Spell key={alt_key} spell={spell}/>
+                  ))}
+                </div>
               ))}
             </ul>
         </div>
