@@ -1,10 +1,12 @@
 import Cookies from "js-cookie";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { LoginContext } from "../../../App";
 
 export default function SignIn() {
     const { loginData, setLoginData, checkInput, setUser } = useContext(LoginContext);
+    const [showPopup, setShowPopup] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
 
     console.log(loginData);
@@ -21,14 +23,15 @@ export default function SignIn() {
             if (response.ok) {
                 const data = await response.json();
                 // Handle successful login, e.g., store token in local storage
-                console.log(data);
+                
                 Cookies.set("jwt", data.token);
                 document.body.classList.remove('loading');
+                setShowPopup(false);
                 setUser(loginData.email)
             } else {
-                // Handle error response
                 document.body.classList.remove('loading');
-                console.error("Login failed:", response.statusText);
+                setErrorMessage("Login failed");
+                setShowPopup(true);
             }
         } catch (error) {
             console.error("Login failed:", error.message);
@@ -45,6 +48,12 @@ export default function SignIn() {
     return (
         <div className="sign-in-container">
             <img src="https://res.cloudinary.com/dhvcqoipp/image/upload/v1710498763/logo_xevjg4.png"></img>
+            {showPopup && (
+                <div className="popup">
+                    <p>{errorMessage}</p>
+                    <button onClick={() => setShowPopup(false)}>Close</button>
+                </div>
+            )}
             <div className="input-area">
                 <input
                     id="e-mail"

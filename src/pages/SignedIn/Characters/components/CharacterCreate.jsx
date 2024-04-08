@@ -9,6 +9,7 @@ export default function CharacterCreate() {
 
     async function createCharacter() {
         try {
+            document.body.classList.add('loading');
             console.log(name);
             const jwtToken = Cookies.get('jwt');
 
@@ -20,7 +21,7 @@ export default function CharacterCreate() {
                 }
             }
             ).then(res => res.json());
-            
+            document.body.classList.remove('loading');
             navigate(`/Characters/${result.id}`);
 
         } catch (error) {

@@ -4,15 +4,34 @@ import CharacterListItem from "./CharacterListItem";
 
 function CharacterList() {
     const { fetchAllCharacters } = useContext(DataContext)
-    const [characters, setCharacters] = useState([]);
+    const [characters, setCharacters] = useState();
+    const [loadingText, setLoadingText] = useState('Loading...');
 
     useEffect(() => {
-        fetchAllCharacters(setCharacters)
-        console.log(characters)
+        fetchAllCharacters(setCharacters) 
     }, [])
 
-    if (!characters) return <p>loading...</p>
+    useEffect(() => {
+      let interval;
+      console.log(characters)
+      if (!characters) {
 
+        interval = setInterval(() => {
+          setLoadingText(prevText => {
+            const dots = prevText.length - "Loading".length;
+            return `Loading${'.'.repeat(dots % 3 + 1)}`;
+          });
+        }, 1000);
+      } else {
+        setLoadingText('Loading complete!');
+      }
+  
+      return () => clearInterval(interval);
+    }, [characters]); 
+
+    if(!characters) return (
+        <p>{loadingText}</p>
+    );
 
     return (
         <>
