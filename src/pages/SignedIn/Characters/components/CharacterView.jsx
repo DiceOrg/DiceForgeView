@@ -13,13 +13,31 @@ export default function CharacterView() {
   const { id } = useParams();
   const { fetchCharacter } = useContext(DataContext)
   const [character, setCharacter] = useState();
+  const [loadingText, setLoadingText] = useState('Loading...');
 
   useEffect(() => {
     fetchCharacter(id, setCharacter);
   }, [])
 
-  if (character == null)
-    return <>loading...</>
+  useEffect(() => {
+    let interval;
+    if (!character) {
+      interval = setInterval(() => {
+        setLoadingText(prevText => {
+          const dots = prevText.length - "Loading".length;
+          return `Loading${'.'.repeat(dots % 3 + 1)}`;
+        });
+      }, 1000);
+    } else {
+      setLoadingText('Loading complete!');
+    }
+
+    return () => clearInterval(interval);
+  }, [character]); 
+
+  if(!character) return (
+    <p>{loadingText}</p>
+);
 
   return (
     <div className="container">

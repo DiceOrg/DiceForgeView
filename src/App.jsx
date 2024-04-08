@@ -28,7 +28,8 @@ function App() {
   });
   const [color, setColor] = useState(() => {
     const initialTheme = localStorage.getItem("color");
-    return initialTheme ? initialTheme : "monochrome";
+    console.log("first set");
+    return initialTheme ? initialTheme : "color";
 });
 
   function checkInput(inputField) {
