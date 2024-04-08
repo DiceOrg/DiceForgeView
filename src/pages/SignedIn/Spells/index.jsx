@@ -1,37 +1,38 @@
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
+import Spell from "./Spell";
 
 export default function Spells({character}) {
     const [spellsRef, setSpellsRef] = useState(character.spells);
     const [spells, setSpells] = useState([]);
     const [totalSpells, setTotalSpells] = useState([]);
-    
-    const getSpellDetails = () => {
-      console.log("ref", spellsRef);
-      const getDetails = async (element, spellArray) => {
-        const result = await fetch(`https://www.dnd5eapi.co/api/spells/${element.index}`)
-        const res = await result.json();
-        await spellArray.push(res);
-      }
 
-      let spellArray = [];
-
-      spellsRef.forEach(element => {
-        try{
-          getDetails(element, spellArray);
-        } catch (error){
-          console.error("Login failed:", error.message);
-        }
-      });
-      setSpells(spellArray);
+    const getDetails = async (element) => {
+      console.log("details", element)
+      return fetch(`https://www.dnd5eapi.co/api/spells/${element.index}`)
     }
 
-    const getSpells = async () => {
+    const fetchData = async () => {
+      const responses = await Promise.all(
+        spellsRef.map(s => getDetails(s))
+      );
+
+      const data = await Promise.all(responses.map(response => response.json()));
+
+      setSpells(data);
+    }
+
+    useEffect(() => {
+
+      fetchData();
+
+    }, [spellsRef]);
+
+    const getAllSpells = async () => {
         try {
           const response = await fetch("https://www.dnd5eapi.co/api/spells")
           if (response.ok) {
             const data = await response.json();
-            console.log(data);
             
             setTotalSpells(data.results);
             // shuffeling array go get 10 random spells 
@@ -47,12 +48,11 @@ export default function Spells({character}) {
         }
     };
 
-    console.log("spell id", character.id)
     const addSpell = async (spell) => {
       console.log("add", spell);
       try {
         const jwtToken = Cookies.get('jwt');
-        await fetch(
+        const data = await fetch(
           `https://localhost:7256/character/${character.id}/Spells`, {
           method: 'POST', 
                 headers: {
@@ -61,7 +61,14 @@ export default function Spells({character}) {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(spell)
-        }).then(res => res.json()).then(res => setSpellsRef([...spellsRef, res]));
+        }).then(res => res.json());
+
+        console.log("add details", data);
+        const spellDetails = getDetails(data);
+
+        setSpellsRef([...spellsRef, data]);
+        setSpells([...spells, spellDetails]);
+
 
       } catch (error){
         console.error('Error fetching data:', error.message);
@@ -69,14 +76,8 @@ export default function Spells({character}) {
     }
 
     useEffect(() =>{
-        getSpells();
+        getAllSpells();
     }, [])
-
-    useEffect(() => {
-        console.log("STATE:", spellsRef)
-        getSpellDetails()
-
-    }, [spellsRef])
 
     const [searchSpells, setSearchSpells] = useState([]);
     const [focus, setFocus] = useState(false);
@@ -86,9 +87,6 @@ export default function Spells({character}) {
         filter(spell => spell.name.toLowerCase().
           includes(value.toLowerCase())));
     }
-
-    console.log("total", totalSpells);
-
 
     console.log("spells", spells);
 
@@ -112,10 +110,8 @@ export default function Spells({character}) {
             )}
             </ul>
             <ul>
-              {spells.map(spell => (
-                <li key={spell.index} >
-                  {spell.name} {spell.concentation ? "(C)" : ""}
-                </li>
+              {spells.map((spell, key) => (
+                <Spell key={key} spell={spell}/>
               ))}
             </ul>
         </div>

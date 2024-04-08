@@ -28,7 +28,6 @@ function App() {
   });
   const [color, setColor] = useState(() => {
     const initialTheme = localStorage.getItem("color");
-    console.log("first set");
     return initialTheme ? initialTheme : "monochrome";
 });
 
@@ -59,7 +58,6 @@ function App() {
       if (response.ok) {
         const data = await response.json();
         setCharacter(data);
-        console.log('Data:', data);
       } else {
         console.error('Failed to fetch data:', response.statusText);
       }
@@ -83,7 +81,6 @@ function App() {
       if (response.ok) {
         const data = await response.json();
         setCharacters(data);
-        console.log('Data:', data);
       } else {
         console.error('Failed to fetch data:', response.statusText);
       }
@@ -100,7 +97,6 @@ function App() {
   useEffect(() => {
     const jwtToken = Cookies.get('jwt');
     let signedIn = false;
-    console.log(jwtToken)
     if (jwtToken) {
       const isExpired = isCookieExpired('jwt');
       if (isExpired) {

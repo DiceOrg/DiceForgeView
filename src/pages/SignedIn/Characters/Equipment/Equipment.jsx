@@ -36,10 +36,6 @@ function Equipment() {
     getEquipment();
   }, []);
 
-  useEffect(() => {
-    console.log("STATE:", equipment);
-  }, [equipment]);
-
   return (
     <>
       <div>
