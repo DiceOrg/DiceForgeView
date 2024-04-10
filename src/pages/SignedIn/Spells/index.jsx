@@ -8,7 +8,6 @@ export default function Spells({character}) {
     const [totalSpells, setTotalSpells] = useState([]);
 
     const getDetails = async (element) => {
-      console.log("details", element)
       return fetch(`https://www.dnd5eapi.co/api/spells/${element.index}`)
     }
 
@@ -49,7 +48,6 @@ export default function Spells({character}) {
     };
 
     const addSpell = async (spell) => {
-      console.log("add", spell);
       try {
         const jwtToken = Cookies.get('jwt');
         const data = await fetch(
@@ -63,7 +61,6 @@ export default function Spells({character}) {
                 body: JSON.stringify(spell)
         }).then(res => res.json());
 
-        console.log("add details", data);
         const spellDetails = getDetails(data);
 
         setSpellsRef([...spellsRef, data]);
@@ -88,13 +85,12 @@ export default function Spells({character}) {
           includes(value.toLowerCase())));
     }
 
-    console.log("spells", spells);
-
-    const spellLevels = [...new Set(spells.map(spell => spell.level))].sort()
-    console.log("levels", spellLevels)
+    const spellLevels = [...new Set(spells.map(spell => spell.level))].sort();
 
     if(spellLevels.length == 0)
       return <>Loading...</>
+
+    console.log(character)
 
     return (
         <>
@@ -120,7 +116,7 @@ export default function Spells({character}) {
                 <div key={key}>
                   <h1 className="spell title" key={key}>{level == 0 ? "Cantrips" : level + ". level spells"}</h1>
                   {spells.filter(spell => spell.level == level).map((spell, alt_key) => (
-                    <Spell key={alt_key} spell={spell}/>
+                    <Spell key={alt_key} spell={spell} level={character.level}/>
                   ))}
                 </div>
               ))}
