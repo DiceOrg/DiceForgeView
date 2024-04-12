@@ -3,11 +3,6 @@ import React, { useState } from 'react';
 export default function Spell({spell, level}) {
     
     const [popup, setPopup] = useState(false);
-    const openPopUp = () => {
-        console.log(spell);
-        //console.log(Object.keys(spell.damage.damage_at_character_level))
-        setPopup(true);
-    }
 
 
     let cantripLevel = 1;
@@ -17,12 +12,11 @@ export default function Spell({spell, level}) {
                 .filter(i => i <= level)
                 .map(number => parseInt(number))
         );
-        console.log(cantripLevel);
     }
 
     return (
         <>
-        <li onClick={() => openPopUp()}>
+        <li onClick={() => setPopup(true)}>
             {spell.name} {spell.concentration ? "(C) " : ""} {spell.components && spell.components.includes("M") ? "(M) " : "" }
             Range: {spell.range + " "}
             {spell.area_of_effect ? 
@@ -39,6 +33,9 @@ export default function Spell({spell, level}) {
             {spell.attack_type ? spell.attack_type + " attack" : ""}
             {spell.dc ? "Save: " + spell.dc.dc_type.name : ""}
         </li>
+
+
+
         {popup && (<div className='popup'>
                 <h3>{spell.name} ({spell.components.join(", ")})</h3>
                 <p>Concentration: {spell.concentration ? "true" : "false"}</p>
