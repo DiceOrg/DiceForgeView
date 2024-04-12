@@ -21,7 +21,7 @@ export default function Style({ character, setCharacter }) {
                 body: JSON.stringify(style)
             }
             ).then(res => res.json());
-            console.log(result)
+            console.log("result style: ", result)
 
         } catch (error) {
             console.error('Error fetching data:', error.message);
@@ -38,7 +38,7 @@ export default function Style({ character, setCharacter }) {
 
     const changeStyle = (event) => {
         const { name, value } = event.target;
-        if (name == "age" && isNaN(value)) {
+        if ( (name == "age" || name == "style") && isNaN(value)) {
             return;
         }
         let styleToChange = { ...style };
@@ -46,7 +46,7 @@ export default function Style({ character, setCharacter }) {
         setCharacter({ ...character, style: styleToChange });
         setStyle(styleToChange);
         setAlteration(true);
-        console.log(styleToChange);
+        console.log("change:", styleToChange);
     }
 
 
@@ -102,7 +102,7 @@ export default function Style({ character, setCharacter }) {
                     <div>Background</div>
                 </div>
                 <div className="column text-center">
-                    <input type="text" name="level" value="20" readOnly={true}></input>
+                    <input type="text" name="level" value={style.level} onChange={(event) => changeStyle(event)}></input>
                     <div>Level</div>
                 </div>
             </div>

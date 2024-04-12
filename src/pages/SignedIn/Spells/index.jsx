@@ -34,9 +34,6 @@ export default function Spells({character}) {
             const data = await response.json();
             
             setTotalSpells(data.results);
-            // shuffeling array go get 10 random spells 
-            // const shuffledSpells = shuffleArray(data.results);
-            // setSpells(shuffledSpells.slice(0, 10));
             
           } else {
             // Handle error response
@@ -87,9 +84,6 @@ export default function Spells({character}) {
 
     const spellLevels = [...new Set(spells.map(spell => spell.level))].sort();
 
-    if(spellLevels.length == 0)
-      return <>Loading...</>
-
     console.log(character)
 
     return (
@@ -116,7 +110,7 @@ export default function Spells({character}) {
                 <div key={key}>
                   <h1 className="spell title" key={key}>{level == 0 ? "Cantrips" : level + ". level spells"}</h1>
                   {spells.filter(spell => spell.level == level).map((spell, alt_key) => (
-                    <Spell key={alt_key} spell={spell} level={character.level}/>
+                    <Spell key={alt_key} spell={spell} level={character.style.level}/>
                   ))}
                 </div>
               ))}

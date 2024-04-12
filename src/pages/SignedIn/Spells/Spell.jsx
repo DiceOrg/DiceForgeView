@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 
 export default function Spell({spell, level}) {
     
@@ -13,10 +13,11 @@ export default function Spell({spell, level}) {
     let cantripLevel = 1;
     if ( spell.damage && spell.damage.damage_at_character_level ){
         cantripLevel = Math.max(
-            Object.keys(spell.damage.damage_at_character_level)
+            ...Object.keys(spell.damage.damage_at_character_level)
                 .filter(i => i <= level)
                 .map(number => parseInt(number))
         );
+        console.log(cantripLevel);
     }
 
     return (
