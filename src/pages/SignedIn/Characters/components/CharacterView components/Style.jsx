@@ -5,48 +5,20 @@ export default function Style({ character, setCharacter }) {
 
 
     const [style, setStyle] = useState(character.style);
-    const [alteration, setAlteration] = useState(false);
-
-    async function updateStyle() {
-        try {
-            const jwtToken = Cookies.get('jwt');
-
-            const result = await fetch(`https://localhost:7256/character/Style/${style.id}`, {
-                method: 'PUT',
-                headers: {
-                    'accept': "*/*",
-                    'Authorization': `Bearer ${jwtToken}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(style)
-            }
-            ).then(res => res.json());
-            console.log("result style: ", result)
-
-        } catch (error) {
-            console.error('Error fetching data:', error.message);
-        }
-    }
-
-    useEffect(() => {
-        if (alteration) {
-            updateStyle();
-            setAlteration(false);
-            console.log("put was done");
-        }
-    }, [alteration])
 
     const changeStyle = (event) => {
         const { name, value } = event.target;
-        if ( (name == "age" || name == "style") && isNaN(value)) {
-            return;
-        }
         let styleToChange = { ...style };
-        styleToChange[name] = value;
+        if ( (name == "age" || name == "level")) {
+            if ( isNaN(value) )
+                return;
+            styleToChange[name] = value > 0 ? Number(value) : 0;
+        }else{
+            styleToChange[name] = value;
+        }
+        
         setCharacter({ ...character, style: styleToChange });
         setStyle(styleToChange);
-        setAlteration(true);
-        console.log("change:", styleToChange);
     }
 
 

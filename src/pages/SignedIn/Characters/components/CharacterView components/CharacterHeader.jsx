@@ -4,104 +4,22 @@ import React, { useEffect, useState } from "react";
 function CharacterHeader({ character, setCharacter }) {
   const [speed, setSpeed] = useState(character.speed);
   const [health, setHitPoints] = useState(character.health);
-  const [alteration, setAlteration] = useState(false);
-
-  async function updateSpeed() {
-    try {
-      const jwtToken = Cookies.get("jwt");
-
-      const response = await fetch(
-        `https://localhost:7256/character/Speed/${character.id}`,
-        {
-          method: "PUT",
-          headers: {
-            Authorization: `Bearer ${jwtToken}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ value: speed }),
-        }
-      );
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Chaaaaange");
-      } else {
-        console.error("Failed to fetch data:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error.message);
-    }
-  }
 
   const changeSpeed = async (event) => {
     try {
       const { value } = event.target;
 
-      const newSpeed = value === "" ? 0 : parseInt(value, 10);
+      if (isNaN(value))
+        return;
+
+      const newSpeed = value > 0 ? Number(value) : 0;
 
       setSpeed(newSpeed);
+      setCharacter({...character, speed: newSpeed});
     } catch (error) {
       console.error("Error updating speed:", error);
     }
   };
-
-  useEffect(() => {
-    async function updateSpeedEffect() {
-      try {
-        await updateSpeed();
-      } catch (error) {
-        console.error("Error updating speed:", error);
-      }
-    }
-
-    if (speed !== character.speed) {
-      updateSpeedEffect();
-    }
-  }, [speed]);
-
-
-  async function updateHealth() {
-    try {
-      const jwtToken = Cookies.get("jwt");
-      console.log("hitpoints", health)
-
-      const response = await fetch(
-        `https://localhost:7256/character/HitPoints/${character.health.id}`,
-        {
-          method: "PUT",
-          headers: {
-            Authorization: `Bearer ${jwtToken}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(health),
-        }
-      );
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Chaaaaange");
-      } else {
-        console.error("Failed to fetch data:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error.message);
-    }
-  }
-
-  useEffect(() => {
-    async function updateHitPoints() {
-      try {
-        await updateHealth();
-      } catch (error) {
-        console.error("Error updating speed:", error);
-      }
-    }
-
-    if (alteration) {
-      updateHitPoints();
-      setAlteration(false);
-    }
-  }, [alteration]);
 
   const changeHitPoint = (event) => {
     const { name, value } = event.target;
@@ -114,7 +32,6 @@ function CharacterHeader({ character, setCharacter }) {
         return;
     setCharacter(objectToChange);
     setHitPoints(objectToChange.health);
-    setAlteration(true);
 }
 
   return (

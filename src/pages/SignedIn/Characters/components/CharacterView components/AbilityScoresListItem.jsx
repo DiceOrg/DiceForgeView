@@ -9,35 +9,6 @@ export default function AbilityScoresListItem({ ability_ref, index, setCharacter
     let prof_value = 2;
 
     const [ability, setAbility] = useState(ability_ref);
-    const [alteration, setAlteration] = useState(false);
-
-    async function updateAbility() {
-        try {
-            const jwtToken = Cookies.get('jwt');
-
-            await fetch(`https://localhost:7256/character/Ability/${ability.id}`, {
-                method: 'PUT',
-                headers: {
-                    'accept': "*/*",
-                    'Authorization': `Bearer ${jwtToken}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(ability)
-            }
-            ).then(res => res.json());
-
-        } catch (error) {
-            console.error('Error fetching data:', error.message);
-        }
-    }
-
-    useEffect(() => {
-        // do not update with empty string, and if alteration has been made
-        if (alteration && ability.value.length != 0) {
-            updateAbility();
-            setAlteration(false);
-        }
-    }, [alteration]);
 
     const changeAbility = (event) => {
         console.log(index);
@@ -58,7 +29,6 @@ export default function AbilityScoresListItem({ ability_ref, index, setCharacter
             return;
         setCharacter(objectToChange);
         setAbility(objectToChange.abilities[index]);
-        setAlteration(true);
     }
 
     return (

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { useParams } from 'react-router-dom';
 import { DataContext } from "../../../../App";
 import SkillList from "./CharacterView components/SkillList";
@@ -8,6 +8,7 @@ import AbilityScoresList from "./CharacterView components/AbilityScoresList";
 import Style from "./CharacterView components/Style";
 import Spells from "../../Spells";
 import Equipment from "../Equipment/Equipment";
+import Cookies from "js-cookie";
 
 export default function CharacterView() {
   const { id } = useParams();
@@ -15,10 +16,50 @@ export default function CharacterView() {
   const [character, setCharacter] = useState();
   const [loadingText, setLoadingText] = useState('Loading...');
 
+  // timer for put requests
+  // when inactive for 5 seconds update form
+  const INACTIVITY_TIMEOUT = 5*1000;
+  const inactivityTimer = useRef(null);
+
+
+  useEffect(() => {
+    resetInactivityTimer();
+
+    return () => clearTimeout(inactivityTimer.current);
+  }, [character])
+
+  const resetInactivityTimer = () => {
+    clearTimeout(inactivityTimer.current);
+
+    inactivityTimer.current = setTimeout(
+      () => {
+        updateCharacter(character);
+      }, 
+      INACTIVITY_TIMEOUT
+    );
+  }
+
+  const updateCharacter = async (character) => {
+    const jwtToken = Cookies.get('jwt');
+
+    await fetch(`https://localhost:7256/character/${character.id}`, {
+        method: 'PUT',
+        headers: {
+            'accept': "*/*",
+            'Authorization': `Bearer ${jwtToken}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(character)
+    }
+    ).then(res => res.json()).then(console.log());
+  }
+
   useEffect(() => {
     fetchCharacter(id, setCharacter);
   }, [])
 
+
+  // Loading interface
   useEffect(() => {
     let interval;
     if (!character) {
@@ -44,11 +85,11 @@ export default function CharacterView() {
       <div className="row character-header-row">
         <div className="column size-3">
           <div className="title-box">
-            <CharacterStyleHeader character={character} setCharacter={setCharacter} />
+            <CharacterStyleHeader character={character} setCharacter={setCharacter}/>
           </div>
         </div>
         <div className="column size-4">
-          <CharacterHeader character={character} setCharacter={setCharacter} />
+          <CharacterHeader character={character} setCharacter={setCharacter}/>
         </div>
       </div>
       <div className="row style-container">

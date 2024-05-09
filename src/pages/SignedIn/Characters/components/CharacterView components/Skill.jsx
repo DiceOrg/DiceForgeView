@@ -16,27 +16,6 @@ export default function Skill({ skill_name, skill_ref, abilities, character, set
         return result;
     }
 
-
-    async function updateSkill() {
-        try {
-            const jwtToken = Cookies.get('jwt');
-
-            await fetch(`https://localhost:7256/character/Skill/${skill.id}`, {
-                method: 'PUT',
-                headers: {
-                    'accept': "*/*",
-                    'Authorization': `Bearer ${jwtToken}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(skill)
-            }
-            ).then(res => res.json());
-
-        } catch (error) {
-            console.error('Error fetching data:', error.message);
-        }
-    }
-
     let prof_value = 2;
     let exp_value = 2;
 
@@ -45,18 +24,11 @@ export default function Skill({ skill_name, skill_ref, abilities, character, set
     const changeSkill = (event) => {
         const { name } = event.target;
         let objectToChange = { ...character };
-        objectToChange.skills.find(elm => elm.name == skill_name)[name] != skill[name];
+        const index = objectToChange.skills.findIndex(elm => elm.name == skill_name); 
+        objectToChange.skills[index][name] = !skill[name];
         setCharacter(objectToChange);
         setSkill({ ...skill, [name]: !skill[name] })
-        setAlteration(true);
     }
-
-    useEffect(() => {
-        if (alteration) {
-            updateSkill();
-            setAlteration(false);
-        }
-    }, [alteration, skill])
 
     return (
         <div className="row skill-row full-skill-row">
