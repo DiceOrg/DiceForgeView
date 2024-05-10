@@ -15,6 +15,7 @@ export default function CharacterView() {
   const { fetchCharacter } = useContext(DataContext)
   const [character, setCharacter] = useState();
   const [loadingText, setLoadingText] = useState('Loading...');
+  const [saved, setSaved] = useState(true);
 
   // timer for put requests
   // when inactive for 5 seconds update form
@@ -24,6 +25,7 @@ export default function CharacterView() {
 
   useEffect(() => {
     resetInactivityTimer();
+    setSaved(false);
 
     return () => clearTimeout(inactivityTimer.current);
   }, [character])
@@ -34,6 +36,7 @@ export default function CharacterView() {
     inactivityTimer.current = setTimeout(
       () => {
         updateCharacter(character);
+        setSaved(true);
       }, 
       INACTIVITY_TIMEOUT
     );
@@ -82,6 +85,8 @@ export default function CharacterView() {
 
   return (
     <div className="container">
+      {!saved && <p>Not saved</p>}
+      {saved && <p>saved</p>}
       <div className="row character-header-row">
         <div className="column size-3">
           <div className="title-box">
