@@ -45,6 +45,8 @@ export default function Spells({character}) {
     };
 
     const addSpell = async (spell) => {
+      if ( spells.find(s => s.name == spell.name) )
+        return;
       try {
         const jwtToken = Cookies.get('jwt');
         const data = await fetch(
@@ -58,7 +60,7 @@ export default function Spells({character}) {
                 body: JSON.stringify(spell)
         }).then(res => res.json());
 
-        const spellDetails = getDetails(data);
+        const spellDetails = await getDetails(data);
 
         setSpellsRef([...spellsRef, data]);
         setSpells([...spells, spellDetails].sort(elm => elm.name));
@@ -84,7 +86,10 @@ export default function Spells({character}) {
 
     const spellLevels = [...new Set(spells.map(spell => spell.level))].sort();
 
-    console.log(character)
+    // timeout before blur happens, if instant item is not clickable
+    // Note that this is effectively a hack and should be changed
+    const BLUR_TIMEOUT = 100;
+    let blurTimer;
 
     return (
         <>
@@ -93,12 +98,15 @@ export default function Spells({character}) {
             id="myInput"
             onChange={(elm) => adaptiveChange(elm)}
             placeholder="Search for spells.."
-            onFocus={() => setFocus(true)} onBlur={() => setFocus(false)}/>
+            onFocus={() => setFocus(true)} onBlur={() => {
+              // Continuation of timeout hack
+              blurTimer = setTimeout(() => {
+                setFocus(false)
+              }, BLUR_TIMEOUT)
+              }}/>
             <ul className="spellSearch">
-            {/* This might be an illegal way of doing this, 
-            but it works for the time being*/
-            (focus || searchSpells.length < 10) && 
-              searchSpells.map((spell, key) => 
+            {focus && 
+              searchSpells.slice(0, 10).map((spell, key) => 
               <li key={key} 
               onClick={() => addSpell(spell)}>
                 {spell.name}
